@@ -1,0 +1,39 @@
+.text,
+.list {
+  box-sizing: border-box;
+  margin: 0 auto 32px;
+  max-width: 420px;
+}
+
+.text {
+  display: block;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  padding: 0 20px;
+}
+
+.listItem {
+  padding: 16px 20px 17px;
+}
+
+.listItemWrapper {
+  position: relative;
+
+  &:after {
+    background: var(--color-dark);
+    border-color: var(--color-lighter);
+    border-style: solid;
+    border-width: 0 20px 0 20px;
+    bottom: 0;
+    box-sizing: border-box;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  &:last-of-type:after {
+    content: none;
+  }
+}

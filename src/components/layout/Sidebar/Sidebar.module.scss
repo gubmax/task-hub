@@ -1,0 +1,95 @@
+.wrapper {
+  position: relative;
+  background: rgba(var(--rgb-light), .9);
+  grid-area: nav;
+  grid-column: 1;
+  height: 100%;
+  width: 100%;
+
+  &.isShow > .nav {
+    width: 240px;
+  }
+
+  &.isFullscreen {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+}
+
+.nav {
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  transition: width .25s ease;
+  width: 80px;
+  background: var(--color-light);
+}
+
+.list {
+  padding: 14px 8px 14px 0;
+}
+
+.listItem {
+  align-items: center;
+  border-radius: 0 32px 32px 0;
+  color: var(--color-darker);
+  display: flex;
+  flex-flow: row nowrap;
+  font-weight: 500;
+  margin-bottom: 12px;
+  padding: 11px 11px 11px 31px;
+  transition: color .2s, background .2s, font-weight .2s;
+
+  &:hover,
+  &:focus {
+    color: var(--color-primary);
+
+    & > .listIcon {
+      fill: var(--color-primary);
+    }
+  }
+
+  &:active {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+
+    & > .listIcon {
+      fill: var(--color-accent);
+    }
+  }
+
+  &.isActive {
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+
+    & > .listIcon {
+      fill: var(--color-accent);
+    }
+  }
+}
+
+.listIcon {
+  display: block;
+  fill: var(--color-darker);
+  height: 24px;
+  margin-right: 28px;
+  min-width: 24px;
+  transition: fill .2s;
+  width: 24px;
+}
+
+@media (max-width: 776px) {
+  .nav {
+    background: var(--color-lighter);
+    border-right: 1px solid var(--color-dark);
+  }
+
+  &.isShow > .nav {
+    width: 280px;
+  }
+
+  .list {
+    padding-right: 20px;
+  }
+}

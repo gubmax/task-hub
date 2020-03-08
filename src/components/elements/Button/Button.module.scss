@@ -1,0 +1,83 @@
+.btn {
+  background: transparent;
+  border-radius: 20px;
+  border-width: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 500;
+  height: 40px;
+  letter-spacing: 1px;
+  line-height: 1em;
+  min-width: 160px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 20px;
+  position: relative;
+  z-index: 0;
+
+  &:hover:before,
+  &:focus:before {
+    opacity: 1;
+  }
+
+  &:after {
+    border-radius: 50%;
+    content: "";
+    display: block;
+    left: 50%;
+    opacity: 0;
+    opacity: 0;
+    padding-top: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    z-index: -1;
+  }
+
+  &:focus:after {
+    opacity: 1;
+    padding-top: 120%;
+    transition: opacity .2s ease-out, width .2s ease-out, padding-top .2s ease-out;
+    width: 120%;
+  }
+
+  &.default {
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
+    transition: color .3s;
+
+    &:focus {
+      color: var(--color-accent);
+    }
+
+    &:after {
+      background: var(--color-accent-light);
+    }
+  }
+
+  &.primary {
+    background: var(--color-accent);
+    color: white;
+    transition: background .2s, box-shadow .2s;
+
+    &:after {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    &:before {
+      background: var(--color-accent-light);
+      content: "";
+      display: block;
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: opacity .2s ease-out;
+      width: 100%;
+      z-index: -1;
+    }
+  }
+}

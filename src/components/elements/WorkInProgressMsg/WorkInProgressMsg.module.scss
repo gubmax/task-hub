@@ -1,0 +1,21 @@
+.wrapper {
+  text-align: center;
+  overflow: hidden;
+}
+
+.title,
+.text {
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-dark);
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 6.5rem;
+}
+
+.text {
+  font-size: 3rem;
+}

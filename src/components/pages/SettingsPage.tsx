@@ -25,8 +25,6 @@ const SettingsPage: FC = () => {
     localStorage.setItem('theme', currThemeMode)
   }, [mode, setThemeBySystem, setThemeMode])
 
-  console.warn(bySystem, mode)
-
   return useMemo(() => (
     <List text="Night mode">
       <Switch id="themeBySystem" checked={bySystem} onChange={toggleThemeBySystem}>Auto</Switch>

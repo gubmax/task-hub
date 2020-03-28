@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { setBooleanItemToLocalStorage } from 'src/helpers'
 import { useStore } from 'src/store'
-import { Search } from 'src/components/elements'
+import { SearchField } from 'src/components/elements'
 import { ReactComponent as MenuIcon } from 'src/static/images/icons/menu-24px.svg'
 import { ReactComponent as ProfileIcon } from 'src/static/images/icons/profile-24px.svg'
 import { HeaderProps } from './Header.interface'
@@ -50,7 +50,7 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
         <span className={s.titleHighlight}>H</span>
         <span>ub</span>
       </span>
-      <Search className={s.search} />
+      <SearchField className={s.search} />
       <div className={s.iconsBox}>
         <ProfileIcon className={s.icon} />
       </div>

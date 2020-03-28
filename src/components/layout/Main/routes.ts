@@ -1,7 +1,7 @@
 import { RouteProps } from 'react-router'
 
 import {
-  ProjectsPage, CalendarPage, ReviewPage, InfoPage, SettingsPage,
+  ProjectsPage, CalendarPage, ReviewPage, InfoPage, SearchPage, SettingsPage,
 } from 'src/components/pages'
 
 const routes: RouteProps[] = [
@@ -24,6 +24,11 @@ const routes: RouteProps[] = [
     path: '/info',
     exact: true,
     component: InfoPage,
+  },
+  {
+    path: '/search',
+    exact: true,
+    component: SearchPage,
   },
   {
     path: '/settings',

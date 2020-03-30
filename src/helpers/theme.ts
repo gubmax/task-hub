@@ -4,7 +4,13 @@ const darkModeMatches = () => getDarkModeMediaQuery().matches
 
 const getCurrThemeMode = (isDarkMode: boolean) => (isDarkMode ? 'dark' : 'light')
 
-const setDataThemeAttribute = (theme: string) => document.documentElement.setAttribute('data-theme', theme)
+const setDataThemeAttribute = (theme: string) => {
+  document.documentElement.setAttribute('data-theme', theme)
+
+  // Chrome, Firefox OS and Opera
+  const metaThemeColor = document.querySelector('meta[name=theme-color]')
+  metaThemeColor!.setAttribute('content', theme === 'dark' ? '#212121' : '#fff')
+}
 
 const addChangeThemeListener = () => {
   const darkModeMediaQuery = getDarkModeMediaQuery()

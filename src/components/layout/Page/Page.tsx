@@ -4,17 +4,14 @@ import React, {
 import { Switch, Route, useHistory } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
-import { useStore } from 'src/store'
-import {
-  setDataThemeAttribute, addChangeThemeListener, darkModeMatches, getCurrThemeMode,
-} from 'src/helpers'
+import { useTheme } from 'src/hooks'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
 import { Main } from '../Main'
 import s from './Page.module.scss'
 
 const Page: FC = () => {
-  const [{ mode, bySystem }] = useStore((state) => state.theme)
+  const [, { initThemeChanger }] = useTheme()
   const { location, goBack } = useHistory<{ isModal: boolean }>()
 
   const [linkInHeader, setLinkInHeader] = useState(false)
@@ -32,10 +29,8 @@ const Page: FC = () => {
 
   // Set theme
   useEffect(() => {
-    const currTheme = bySystem === true ? getCurrThemeMode(darkModeMatches()) : mode
-    setDataThemeAttribute(currTheme)
-    addChangeThemeListener()
-  }, [bySystem, mode])
+    initThemeChanger()
+  }, [initThemeChanger])
 
   // Toggle sidebar on resize document body
   useEffect(() => {

@@ -1,29 +1,10 @@
-import React, { FC, useCallback, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 
-import { setDataThemeAttribute, getCurrThemeMode, setBooleanItemToLocalStorage } from 'src/helpers'
-import { useStore } from 'src/store'
-
+import { useTheme } from 'src/hooks'
 import { Switch, List } from 'src/components/elements'
 
 const SettingsPage: FC = () => {
-  const [{ bySystem, mode }, { setThemeMode, setThemeBySystem }] = useStore(
-    (state) => state.theme,
-  )
-
-  const toggleThemeBySystem = useCallback(() => {
-    setBooleanItemToLocalStorage('themeBySystem', !bySystem)
-    setThemeBySystem(!bySystem)
-  }, [bySystem, setThemeBySystem])
-
-  const toggleCurrTheme = useCallback(() => {
-    const currThemeMode = getCurrThemeMode(mode !== 'dark')
-
-    setThemeBySystem(false)
-    setThemeMode(currThemeMode)
-    setDataThemeAttribute(currThemeMode)
-
-    localStorage.setItem('theme', currThemeMode)
-  }, [mode, setThemeBySystem, setThemeMode])
+  const [{ bySystem, mode }, { toggleThemeBySystem, toggleCurrTheme }] = useTheme()
 
   return useMemo(() => (
     <List text="Night mode">

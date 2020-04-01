@@ -69,6 +69,14 @@
 
 .iconsBox {
   display: flex;
+  margin-left: 24px;
+}
+
+.syncLoader {
+  width: 20px;
+  height: 20px;
+  padding: 13px;
+  margin-left: 12px;
 }
 
 @media (max-width: 776px) {

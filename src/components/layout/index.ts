@@ -1,5 +1,6 @@
 export { App } from './App'
 export { Header } from './Header'
 export { Main } from './Main'
+export { Modal } from './Modal'
 export { Page } from './Page'
 export { Sidebar } from './Sidebar'

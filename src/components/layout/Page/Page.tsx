@@ -1,10 +1,10 @@
 import React, {
   FC, useState, useEffect, useMemo,
 } from 'react'
-import { Switch, Route, useHistory } from 'react-router-dom'
-import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { useHistory } from 'react-router-dom'
 
 import { useTheme } from 'src/hooks'
+import { Modal } from 'src/components/layout'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
 import { Main } from '../Main'
@@ -70,34 +70,16 @@ const Page: FC = () => {
       {
         linkInHeader
           ? (
-            <TransitionGroup component={null}>
-              <CSSTransition
-                key={location.key}
-                classNames={sidebarClassNames}
-                timeout={{ enter: 250, exit: 200 }}
-              >
-                <Switch location={location}>
-                  <Route
-                    path="/sidebar"
-                  >
-                    <Sidebar
-                      locationPathName={currLocation.pathname}
-                      goBack={goBack}
-                    />
-                  </Route>
-                </Switch>
-              </CSSTransition>
-            </TransitionGroup>
+            <Modal path="/sidebar" transitionClassNames={sidebarClassNames}>
+              <Sidebar locationPathName={currLocation.pathname} goBack={goBack} />
+            </Modal>
           )
           : (
             <Sidebar locationPathName={currLocation.pathname} />
           )
       }
     </div>
-  ), [
-    currLocation, goBack, linkInHeader, location,
-    sidebarClassNames,
-  ])
+  ), [currLocation, goBack, linkInHeader, sidebarClassNames])
 }
 
 export { Page }

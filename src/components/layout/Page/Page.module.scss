@@ -11,42 +11,24 @@
 
 /* Sidebar Transition */
 .sidebarEnter {
-  opacity: 0;
-
-  &.sidebarEnterActive {
-    opacity: 1;
-    transition: opacity .25s;
-  }
-
   & > div {
-    opacity: 0;
     transform: translateX(-100%);
   }
 
   &.sidebarEnterActive > div {
-    opacity: 1;
     transform: translateX(0);
-    transition: transform .25s ease, opacity .25s linear;
+    transition: transform .25s ease;
   }
 }
 
 .sidebarExit {
-  opacity: 1;
-
-  &.sidebarExitActive {
-    opacity: 0;
-    transition: opacity .2s;
-  }
-
   & > div {
-    opacity: 1;
     transform: translateX(0);
   }
 
   &.sidebarExitActive > div {
-    opacity: 0;
     transform: translateX(-100%);
-    transition: transform .2s ease, opacity .2s linear;
+    transition: transform .2s ease;
   }
 }
 

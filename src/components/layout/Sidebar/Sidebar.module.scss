@@ -1,9 +1,8 @@
 .wrapper {
   position: relative;
-  background: rgba(var(--rgb-light), .9);
   grid-area: nav;
   grid-column: 1;
-  height: 100%;
+  height: 100vh;
   width: 100%;
 
   &.isShow > .nav {
@@ -19,7 +18,7 @@
 
 .nav {
   display: block;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   transition: width .25s ease;
   width: 80px;
@@ -39,7 +38,7 @@
   font-weight: 500;
   margin-bottom: 12px;
   padding: 11px 11px 11px 31px;
-  transition: color .2s, background .2s, font-weight .2s;
+  transition: color .2s, background .2s;
 
   &:hover,
   &:focus {

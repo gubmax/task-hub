@@ -39,7 +39,7 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
         <Link
           to={{
             pathname: '/sidebar',
-            state: { isModal: true },
+            state: { isSidebar: true },
           }}
         >
           { menuIcon }

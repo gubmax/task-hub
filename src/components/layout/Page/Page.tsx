@@ -12,20 +12,20 @@ import s from './Page.module.scss'
 
 const Page: FC = () => {
   const [, { initThemeChanger }] = useTheme()
-  const { location, goBack } = useHistory<{ isModal: boolean }>()
+  const { location, goBack } = useHistory<{ isSidebar: boolean }>()
 
   const [linkInHeader, setLinkInHeader] = useState(false)
   const [prevLocation, setPrevLocation] = useState(location)
 
-  const isModal = location.state && location.state.isModal
-  const currLocation = isModal ? prevLocation : location
+  const isSidebarLocation = location.state && location.state.isSidebar
+  const currLocation = isSidebarLocation ? prevLocation : location
 
   // Save prev location when modal window is open
   useEffect(() => {
-    if (isModal !== true) {
+    if (isSidebarLocation !== true) {
       setPrevLocation(location)
     }
-  }, [isModal, location])
+  }, [isSidebarLocation, location])
 
   // Set theme
   useEffect(() => {
@@ -42,7 +42,7 @@ const Page: FC = () => {
       if (linkInHeader !== bodyIsNarrow) {
         setLinkInHeader(bodyIsNarrow)
   
-        if (bodyIsNarrow === false && isModal === true) {
+        if (bodyIsNarrow === false && isSidebarLocation === true) {
           goBack()
         }
       }
@@ -54,7 +54,7 @@ const Page: FC = () => {
     return () => {
       window.removeEventListener('resize', onResize)
     }
-  }, [goBack, isModal, linkInHeader])
+  }, [goBack, isSidebarLocation, linkInHeader])
 
   const sidebarClassNames = useMemo(() => ({
     enter: s.sidebarEnter,

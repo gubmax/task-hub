@@ -1,5 +1,6 @@
 import React, { FC, useMemo, useCallback, MouseEvent, KeyboardEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { useStore } from 'src/store'
 import { routes } from './routes'
@@ -8,6 +9,7 @@ import s from './Sidebar.module.scss'
 
 const Sidebar: FC<SidebarProps> = ({ locationPathName, goBack }) => {
   const [{ showSidebar }] = useStore()
+  const history = useHistory()
 
   const getLinkClassName = useCallback((path: string) => (
     `${s.listItem} ${locationPathName === path ? s.isActive : ''}`
@@ -32,6 +34,7 @@ const Sidebar: FC<SidebarProps> = ({ locationPathName, goBack }) => {
   return useMemo(() => (
     <div
       className={`${s.wrapper} ${showSidebar || goBack ? s.isShow : ''} ${goBack ? s.isFullscreen : ''}`}
+      onClick={history.goBack}
     >
       <div
         className={s.nav}
@@ -47,6 +50,7 @@ const Sidebar: FC<SidebarProps> = ({ locationPathName, goBack }) => {
     </div>
   ), [
     goBack, onNavClick, routesTemplate, showSidebar,
+    history.goBack,
   ])
 }
 

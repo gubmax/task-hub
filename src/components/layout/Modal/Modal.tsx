@@ -1,18 +1,12 @@
 import React, { FC, useMemo, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition'
-import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
 
+import { ModalProps } from './Modal.interface'
 import s from './Modal.module.scss'
 
-type ModalProps = {
-  path: string,
-  transitionClassNames?: CSSTransitionClassNames,
-}
-
 const Modal: FC<ModalProps> = ({ children, path, transitionClassNames }) => {
-  const history = useHistory()
   const location = useLocation()
 
   const el = useMemo(() => (
@@ -47,14 +41,14 @@ const Modal: FC<ModalProps> = ({ children, path, transitionClassNames }) => {
       >
         <Switch location={location}>
           <Route path={path}>
-            <div className={s.wrapper} onClick={history.goBack}>
+            <div className={s.overlay}>
               {children}
             </div>
           </Route>
         </Switch>
       </CSSTransition>
     </TransitionGroup>
-  ), [children, history.goBack, location, path, switchTransitionClassNames])
+  ), [children, location, path, switchTransitionClassNames])
 
   return createPortal(template, el)
 }

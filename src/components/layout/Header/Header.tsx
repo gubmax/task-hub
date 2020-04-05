@@ -2,17 +2,18 @@ import React, { FC, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
 import { setBooleanItemToLocalStorage } from 'src/helpers'
-import { useRequest } from 'src/hooks'
+import { useAuth, useRequest } from 'src/hooks'
 import { useStore } from 'src/store'
 import { SearchField, Loader } from 'src/components/elements'
 import { ReactComponent as MenuIcon } from 'src/static/images/icons/menu-24px.svg'
 import { ReactComponent as RefreshIcon } from 'src/static/images/icons/refresh-24px.svg'
-import { ReactComponent as ProfileIcon } from 'src/static/images/icons/profile-24px.svg'
+import { ReactComponent as SignOutIcon } from 'src/static/images/icons/sign-out-24px.svg'
 import { HeaderProps } from './Header.interface'
 import s from './Header.module.scss'
 
 const Header: FC<HeaderProps> = ({ iconWithLink }) => {
   const [{ showSidebar }, { toggleSidebar }] = useStore()
+  const [, { signOut }] = useAuth()
   const [{ isLoading }, fetchSync] = useRequest<true>({
     url: '/sync',
     preload: true,
@@ -39,7 +40,10 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
         <Link
           to={{
             pathname: '/sidebar',
-            state: { isSidebar: true },
+            state: { 
+              isSidebar: true,
+              isModal: true,
+            },
           }}
         >
           { menuIcon }
@@ -69,10 +73,10 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
       <SearchField className={s.search} />
       <div className={s.iconsBox}>
         {syncTemplate}
-        <ProfileIcon className={s.icon} />
+        <SignOutIcon className={s.icon} onClick={signOut} />
       </div>
     </header>
-  ), [menuIconTemplate, syncTemplate])
+  ), [menuIconTemplate, syncTemplate, signOut])
 }
 
 export { Header }

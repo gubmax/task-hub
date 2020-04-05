@@ -1,36 +1,31 @@
-import React, {
-  FC, useState, useEffect, useMemo,
-} from 'react'
+import React, { FC, useState, useEffect, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { useTheme } from 'src/hooks'
-import { Modal } from 'src/components/layout'
+import { ModalWindow } from 'src/components/elements'
+import { SignInPage } from 'src/components/pages'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
 import { Main } from '../Main'
+import { LocationType } from './Page.interface'
 import s from './Page.module.scss'
 
 const Page: FC = () => {
-  const [, { initThemeChanger }] = useTheme()
-  const { location, goBack } = useHistory<{ isSidebar: boolean }>()
+  const { location, goBack } = useHistory<LocationType>()
 
   const [linkInHeader, setLinkInHeader] = useState(false)
   const [prevLocation, setPrevLocation] = useState(location)
 
-  const isSidebarLocation = location.state && location.state.isSidebar
-  const currLocation = isSidebarLocation ? prevLocation : location
+  const { state } = location
+  const isSidebarLocation = state && state.isSidebar
+  const isModalLocation = state && state.isModal
+  const currLocation = isModalLocation ? prevLocation : location
 
-  // Save prev location when modal window is open
+  // Save prev location when sidebar is open
   useEffect(() => {
-    if (isSidebarLocation !== true) {
+    if (isModalLocation !== true) {
       setPrevLocation(location)
     }
-  }, [isSidebarLocation, location])
-
-  // Set theme
-  useEffect(() => {
-    initThemeChanger()
-  }, [initThemeChanger])
+  }, [isModalLocation, location])
 
   // Toggle sidebar on resize document body
   useEffect(() => {
@@ -63,23 +58,33 @@ const Page: FC = () => {
     exitActive: s.sidebarExitActive,
   }), [])
 
-  return useMemo(() => (
-    <div className={s.base}>
-      <Header iconWithLink={linkInHeader} />
-      <Main location={currLocation} />
-      {
-        linkInHeader
-          ? (
-            <Modal path="/sidebar" transitionClassNames={sidebarClassNames}>
-              <Sidebar locationPathName={currLocation.pathname} goBack={goBack} />
-            </Modal>
-          )
-          : (
-            <Sidebar locationPathName={currLocation.pathname} />
-          )
-      }
-    </div>
-  ), [currLocation, goBack, linkInHeader, sidebarClassNames])
+  const sidebarTemplate = useMemo(() => {
+    if (linkInHeader) {
+      return (
+        <ModalWindow path="/sidebar" transitionClassNames={sidebarClassNames}>
+          <Sidebar locationPathName={currLocation.pathname} goBack={goBack} />
+        </ModalWindow>
+      )
+    }
+
+    return <Sidebar locationPathName={currLocation.pathname} />
+  }, [goBack, linkInHeader, currLocation.pathname, sidebarClassNames])
+
+  const pageTemplate = useMemo(() => {
+    if (currLocation.pathname === '/sign-in') {
+      return <SignInPage />
+    }
+
+    return (
+      <div className={s.base}>
+        <Header iconWithLink={linkInHeader} />
+        <Main location={currLocation} />
+        {sidebarTemplate}
+      </div>
+    )
+  }, [currLocation, linkInHeader, sidebarTemplate])
+
+  return pageTemplate
 }
 
 export { Page }

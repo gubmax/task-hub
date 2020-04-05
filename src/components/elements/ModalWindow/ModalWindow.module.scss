@@ -1,0 +1,29 @@
+.overlay {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: rgba(var(--rgb-light), .9);
+}
+
+.fadeEnter {
+  opacity: 0;
+
+  &.fadeEnterActive {
+    opacity: 1;
+    transition: opacity 0.25s;
+  }
+}
+
+.fadeExit {
+  opacity: 1;
+
+  &.fadeExitActive {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+}

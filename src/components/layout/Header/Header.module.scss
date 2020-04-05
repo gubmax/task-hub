@@ -52,6 +52,7 @@
 }
 
 .title {
+  flex-shrink: 0;
   color: var(--color-darker);
   font-size: 1.65rem;
   font-weight: 500;
@@ -59,8 +60,14 @@
 }
 
 .titleHighlight {
+  display: inline-block;
+  width: 26px;
+  line-height: 26px;
+  border: 2px solid var(--color-accent);
   color: var(--color-accent);
-  font-weight: 700;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 50%;
 }
 
 .search {
@@ -69,7 +76,7 @@
 
 .iconsBox {
   display: flex;
-  margin-left: 24px;
+  margin-left: 13px;
 }
 
 .syncLoader {

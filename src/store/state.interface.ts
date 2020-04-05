@@ -3,11 +3,14 @@ import { IStore } from './createStore.interface'
 export type TTheme = 'dark' | 'light'
 
 export type TState = {
-  showSidebar: boolean,
   theme: {
     bySystem: boolean,
     mode: TTheme,
   },
+  user: {
+    accessToken: string | null,
+  },
+  showSidebar: boolean,
 }
 
 export type TStore = IStore<TState>

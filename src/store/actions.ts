@@ -1,11 +1,6 @@
 import { TTheme, TStore } from './state.interface'
 
 const actions = {
-  toggleSidebar: ({ state, setState }: TStore) => {
-    const { showSidebar } = state
-    setState!({ showSidebar: !showSidebar })
-  },
-
   setThemeMode: ({ state, setState }: TStore, payload: TTheme) => {
     const { bySystem } = state.theme
     setState!({
@@ -24,6 +19,27 @@ const actions = {
         mode,
       },
     })
+  },
+
+  setAcessToken: ({ setState }: TStore, payload: string) => {
+    setState!({
+      user: {
+        acessToken: payload,
+      },
+    })
+  },
+
+  removeAcessToken: ({ setState }: TStore) => {
+    setState!({
+      user: {
+        acessToken: null,
+      },
+    })
+  },
+
+  toggleSidebar: ({ state, setState }: TStore) => {
+    const { showSidebar } = state
+    setState!({ showSidebar: !showSidebar })
   },
 }
 

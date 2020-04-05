@@ -6,11 +6,14 @@ const bySystem = getBooleanItemFromLocalStorage('themeBySystem')
 const currTheme = localStorage.getItem('theme') as TTheme || null
 
 const initialState: TState = {
-  showSidebar: showSidebar === null || showSidebar,
   theme: {
     bySystem: (bySystem === null && currTheme === null) || Boolean(bySystem),
     mode: 'light',
   },
+  user: {
+    accessToken: 'TOKEN',
+  },
+  showSidebar: showSidebar === null || showSidebar,
 }
 
 export { initialState }

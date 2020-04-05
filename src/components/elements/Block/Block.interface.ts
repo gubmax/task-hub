@@ -1,3 +1,3 @@
 export interface BlockProps {
-  className: string,
+  className?: string,
 }

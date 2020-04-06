@@ -3,10 +3,11 @@ import { useHistory } from "react-router-dom"
 
 import { useRequest, } from 'src/hooks'
 import { useStore } from 'src/store'
+import { UseAuth } from './useAuth.interface'
 
 const ACCESS_TOKEN = 'access-token'
 
-const useAuth = () => {
+const useAuth: UseAuth = () => {
   const history = useHistory()
   const [{ accessToken }, { setAcessToken, removeAcessToken }] = useStore((state) => state.user)
   const [authState, fetchAuth] = useRequest<string>({ url: 'sign-in', data: 'TOKEN' })

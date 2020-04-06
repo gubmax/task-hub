@@ -1,4 +1,7 @@
 .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: transparent;
   border-radius: 20px;
   border-width: 0;
@@ -84,4 +87,9 @@
   &.large {
     width: 100%;
   }
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
 }

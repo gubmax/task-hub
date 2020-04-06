@@ -54,11 +54,7 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
 
   const syncTemplate = useMemo(() => (
     isLoading
-      ? (
-        <span className={s.syncLoader}>
-          <Loader />
-        </span>
-      )
+      ? <Loader className={s.syncLoader} />
       : <RefreshIcon className={s.icon} onClick={fetchSync} />
   ), [fetchSync, isLoading])
 

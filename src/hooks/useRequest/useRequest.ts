@@ -1,4 +1,7 @@
-import { useReducer, useEffect, Reducer, useCallback } from 'react'
+import {
+  useReducer, useRef, useEffect, Reducer,
+  useCallback,
+} from 'react'
 
 import { mockFetch } from 'src/helpers'
 import { useRequestType, ReducerStateType, ReducerActionType } from './useRequest.interface'
@@ -38,22 +41,29 @@ const reducer: Reducer<ReducerStateType, ReducerActionType> = (
 
 const useRequest: useRequestType = ({ url, data, preload }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const didCancel = useRef(false)
 
   const request = useCallback(async () => {
     dispatch({ type: 'FETCH_START' })
-    return mockFetch(data)
-      .then((res) => {
-        dispatch({ type: 'FETCH_SUCCESS', payload: res })
-        return res
-      })
-      .catch((err: Error) => dispatch({ type: 'FETCH_FAILURE', payload: err.toString() }))
+
+    const res = await mockFetch(data)
+
+    if (didCancel.current) {
+      return res
+    }
+
+    if (res instanceof Error) {
+      dispatch({ type: 'FETCH_FAILURE', payload: res.toString() })
+    } else {
+      dispatch({ type: 'FETCH_SUCCESS', payload: res })
+    }
+
+    return res
   }, [data])
 
   useEffect(() => {
-    let didCancel = false
-
     const getData = () => {
-      if (didCancel) {
+      if (didCancel.current) {
         return
       }
 
@@ -65,7 +75,7 @@ const useRequest: useRequestType = ({ url, data, preload }) => {
     }
 
     return () => {
-      didCancel = true
+      didCancel.current = true
     }
   }, [data, url, preload, request])
 

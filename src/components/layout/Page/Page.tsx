@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useMemo } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Switch, Route } from 'react-router-dom'
 
-import { ModalWindow } from 'src/components/elements'
+import { ModalWindow, SwitchTransition } from 'src/components/elements'
 import { SignInPage } from 'src/components/pages'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
@@ -70,21 +70,22 @@ const Page: FC = () => {
     return <Sidebar locationPathName={currLocation.pathname} />
   }, [goBack, linkInHeader, currLocation.pathname, sidebarClassNames])
 
-  const pageTemplate = useMemo(() => {
-    if (currLocation.pathname === '/sign-in') {
-      return <SignInPage />
-    }
-
-    return (
-      <div className={s.base}>
-        <Header iconWithLink={linkInHeader} />
-        <Main location={currLocation} />
-        {sidebarTemplate}
-      </div>
-    )
-  }, [currLocation, linkInHeader, sidebarTemplate])
-
-  return pageTemplate
+  return useMemo(() => (
+    <SwitchTransition transitionKey={currLocation.key}>
+      <Switch location={location}>
+        <Route path="/sign-in">
+          <SignInPage />
+        </Route>
+        <Route path="*">
+          <div className={s.base}>
+            <Header iconWithLink={linkInHeader} />
+            <Main location={currLocation} />
+            {sidebarTemplate}
+          </div>
+        </Route>
+      </Switch>
+    </SwitchTransition>
+  ), [location, currLocation, linkInHeader, sidebarTemplate])
 }
 
 export { Page }

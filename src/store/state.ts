@@ -14,6 +14,9 @@ const initialState: TState = {
     accessToken: 'TOKEN',
   },
   showSidebar: showSidebar === null || showSidebar,
+  search: {
+    isSearching: false,
+  }
 }
 
 export { initialState }

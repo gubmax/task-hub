@@ -1,9 +1,11 @@
 import React, { FC } from 'react'
 
-import { SearchResultList } from 'src/components/elements'
+import { useStore } from 'src/store'
+import { SearchResultList, Loader } from 'src/components/elements'
 
-const SearchPage: FC = () => (
-  <SearchResultList />
-)
+const SearchPage: FC = () => {
+  const [{ isSearching }] = useStore((state) => state.search)
+  return isSearching ? <Loader /> : <SearchResultList />
+}
 
 export { SearchPage }

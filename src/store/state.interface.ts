@@ -11,6 +11,9 @@ export type TState = {
     accessToken: string | null,
   },
   showSidebar: boolean,
+  search: {
+    isSearching: boolean,
+  }
 }
 
 export type TStore = IStore<TState>

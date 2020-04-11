@@ -41,6 +41,14 @@ const actions = {
     const { showSidebar } = state
     setState!({ showSidebar: !showSidebar })
   },
+
+  setSearching: ({ setState }: TStore, payload: boolean) => {
+    setState!({
+      search: {
+        isSearching: payload,
+      },
+    })
+  },
 }
 
 export { actions }

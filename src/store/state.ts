@@ -8,7 +8,7 @@ const currTheme = localStorage.getItem('theme') as TTheme || null
 const initialState: TState = {
   theme: {
     bySystem: (bySystem === null && currTheme === null) || Boolean(bySystem),
-    mode: 'light',
+    mode: currTheme || 'light',
   },
   user: {
     accessToken: 'TOKEN',

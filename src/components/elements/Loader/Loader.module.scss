@@ -11,17 +11,22 @@
     border-right-color: white;
     border-left-color: white;
   }
+
+  &.small > .spinner {
+    width: 20px;
+    height: 20px;
+    border-width: 3px;
+  }
 }
 
 .spinner {
   box-sizing: border-box;
-  width: inherit;
-  height: inherit;
+  width: 44px;
+  height: 44px;
   margin: auto;
-  border-top: 3px solid transparent;
-  border-right: 3px solid var(--color-accent);
-  border-bottom: 3px solid transparent;
-  border-left: 3px solid var(--color-accent);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent var(--color-accent);
   animation: spin 0.75s infinite linear;
 }
 

@@ -31,7 +31,7 @@ const Button: FC<ButtonProps> = ({
       type="button"
       onClick={clickHandler}
     >
-      {loading ? <Loader className={s.loader} white /> : text}
+      {loading ? <Loader small white /> : text}
     </button>
   ), [classNames, clickHandler, loading, text])
 }

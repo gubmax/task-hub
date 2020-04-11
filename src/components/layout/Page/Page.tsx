@@ -9,6 +9,8 @@ import { Main } from '../Main'
 import { LocationType } from './Page.interface'
 import s from './Page.module.scss'
 
+const SIGN_IN_LOCATION_PATHNAME = '/sign-in'
+
 const Page: FC = () => {
   const { location, goBack } = useHistory<LocationType>()
 
@@ -19,6 +21,7 @@ const Page: FC = () => {
   const isSidebarLocation = state && state.isSidebar
   const isModalLocation = state && state.isModal
   const currLocation = isModalLocation ? prevLocation : location
+  const isSwitchableLocation = currLocation.pathname === SIGN_IN_LOCATION_PATHNAME
 
   // Save prev location when sidebar is open
   useEffect(() => {
@@ -59,21 +62,23 @@ const Page: FC = () => {
   }), [])
 
   const sidebarTemplate = useMemo(() => {
+    const { pathname } = currLocation
+
     if (linkInHeader) {
       return (
         <ModalWindow path="/sidebar" transitionClassNames={sidebarClassNames}>
-          <Sidebar locationPathName={currLocation.pathname} goBack={goBack} />
+          <Sidebar locationPathName={pathname} goBack={goBack} />
         </ModalWindow>
       )
     }
 
-    return <Sidebar locationPathName={currLocation.pathname} />
-  }, [goBack, linkInHeader, currLocation.pathname, sidebarClassNames])
+    return <Sidebar locationPathName={pathname} />
+  }, [goBack, linkInHeader, currLocation, sidebarClassNames])
 
   return useMemo(() => (
-    <SwitchTransition transitionKey={currLocation.key}>
+    <SwitchTransition transitionKey={Number(isSwitchableLocation)}>
       <Switch location={location}>
-        <Route path="/sign-in">
+        <Route path={SIGN_IN_LOCATION_PATHNAME}>
           <SignInPage />
         </Route>
         <Route path="*">
@@ -85,7 +90,10 @@ const Page: FC = () => {
         </Route>
       </Switch>
     </SwitchTransition>
-  ), [location, currLocation, linkInHeader, sidebarTemplate])
+  ), [
+    isSwitchableLocation, location, currLocation, linkInHeader,
+    sidebarTemplate,
+  ])
 }
 
 export { Page }

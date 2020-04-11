@@ -6,11 +6,12 @@ import { useStore } from 'src/store'
 import { UseAuth } from './useAuth.interface'
 
 const ACCESS_TOKEN = 'access-token'
+const SIGN_IN_LOCATION_PATHNAME = '/sign-in'
 
 const useAuth: UseAuth = () => {
   const history = useHistory()
   const [{ accessToken }, { setAcessToken, removeAcessToken }] = useStore((state) => state.user)
-  const [authState, fetchAuth] = useRequest<string>({ url: 'sign-in', data: 'TOKEN' })
+  const [authState, fetchAuth] = useRequest<string>({ url: SIGN_IN_LOCATION_PATHNAME, data: 'TOKEN' })
 
   const token = useMemo(() => (
     accessToken || localStorage.getItem(ACCESS_TOKEN)
@@ -37,7 +38,7 @@ const useAuth: UseAuth = () => {
   const signOut = useCallback(() => {
     localStorage.removeItem(ACCESS_TOKEN)
     removeAcessToken()
-    history.push( '/sign-in')
+    history.push(SIGN_IN_LOCATION_PATHNAME)
   }, [removeAcessToken, history])
 
   return useMemo(() => [

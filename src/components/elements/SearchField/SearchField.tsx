@@ -4,7 +4,7 @@ import React, {
 } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-import { useRequest } from 'src/hooks'
+import { useRequest, useDebouncedCallback } from 'src/hooks'
 import { ReactComponent as SearchIcon } from 'src/static/images/icons/search-24px.svg'
 import { ReactComponent as ClearIcon } from 'src/static/images/icons/clear-24px.svg'
 import { SearchFieldProps } from './SearchField.interface'
@@ -18,32 +18,35 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
   const { pathname } = useLocation()
   const [, { setSearching }] = useStore()
   const [, searchFetch] = useRequest({ url: SEARCH_URL, preload: true })
+  const [debounceSearch] = useDebouncedCallback(() => {
+    if (value === '') {
+      return
+    }
+
+    if (pathname !== SEARCH_URL) {
+      history.push(SEARCH_URL)
+    }
+
+    setSearching(true)
+    searchFetch().finally(() => setSearching(false))
+  }, 500)
 
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const isSearchPage = pathname === SEARCH_URL
 
-  const search = useCallback(() => {
-    setSearching(true)
-    searchFetch().finally(() => setSearching(false))
-  } , [searchFetch, setSearching])
-
   const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
-
-    if (pathname !== SEARCH_URL) {
-      history.push(SEARCH_URL)
-    }
-
-    search()
-  }, [history, pathname, search])
+    
+    debounceSearch()
+  }, [debounceSearch])
 
   const onKeyPressHandler = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      search()
+      debounceSearch()
     }
-  }, [search])
+  }, [debounceSearch])
 
   const clearValue = useCallback(() => {
     if (value === '') {
@@ -67,7 +70,7 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
       <input
         type="text"
         className={s.input}
-        value={isSearchPage ? value : ''}
+        value={value}
         ref={inputRef}
         placeholder="Search"
         onChange={onChangeHandler}

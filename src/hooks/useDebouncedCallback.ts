@@ -1,12 +1,17 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useEffect, useCallback } from 'react'
 
 const useDebouncedCallback = <T extends (...args: any[]) => any>(
   callback: T,
-  delay: number = 200,
-): [T, () => void] => {
+  delay: number,
+): [T, T, () => void] => {
   const timeoutHandler = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isComponentUnmounted = useRef(true)
   const debouncedFunction = useRef(callback)
   debouncedFunction.current = callback
+
+  useEffect(() => {
+    isComponentUnmounted.current = false
+  }, [])
 
   const cancelDebouncedCallback = useCallback(() => {
     const timeout = timeoutHandler.current
@@ -25,11 +30,29 @@ const useDebouncedCallback = <T extends (...args: any[]) => any>(
 
     timeoutHandler.current = setTimeout(() => {
       cancelDebouncedCallback()
-      debouncedFunction.current(...args)
+
+      if (isComponentUnmounted.current === false) {
+        debouncedFunction.current(...args)
+      }
     }, delay)
   }, [cancelDebouncedCallback, delay])
 
-  return [debouncedCallback as T, cancelDebouncedCallback]
+  const callDebouncedCallbackImmediately = (...args: any[]) => {
+    if (!timeoutHandler.current) {
+      return
+    }
+
+    if (isComponentUnmounted.current === false) {
+      debouncedFunction.current(...args)
+    }
+    cancelDebouncedCallback()
+  }
+
+  return [
+    debouncedCallback as T,
+    callDebouncedCallbackImmediately as T,
+    cancelDebouncedCallback,
+  ]
 }
 
 export { useDebouncedCallback }

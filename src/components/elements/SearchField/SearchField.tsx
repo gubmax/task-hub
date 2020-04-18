@@ -18,7 +18,7 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
   const { pathname } = useLocation()
   const [, { setSearching }] = useStore()
   const [, searchFetch] = useRequest({ url: SEARCH_URL, preload: true })
-  const [debounceSearch] = useDebouncedCallback(() => {
+  const [debounceSearch, searchImmediately] = useDebouncedCallback(() => {
     if (value === '') {
       return
     }
@@ -44,9 +44,9 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
 
   const onKeyPressHandler = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      debounceSearch()
+      searchImmediately()
     }
-  }, [debounceSearch])
+  }, [searchImmediately])
 
   const clearValue = useCallback(() => {
     if (value === '') {
@@ -62,8 +62,8 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
     <div className={`${s.wrapper} ${className}`}>
       <SearchIcon
         className={`${s.icon} ${s.searchIcon}`}
-        onClick={search}
-        onKeyPress={search}
+        onClick={searchImmediately}
+        onKeyPress={searchImmediately}
         role="button"
         tabIndex={0}
       />
@@ -91,7 +91,7 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
     </div>
   ), [
     className, onChangeHandler, onKeyPressHandler, clearValue,
-    value, search, isSearchPage,
+    value, searchImmediately, isSearchPage,
   ])
 }
 

@@ -1,7 +1,7 @@
-import { TTheme, TStore } from './state.interface'
+import { StoreActions } from './actions.interface'
 
-const actions = {
-  setThemeMode: ({ state, setState }: TStore, payload: TTheme) => {
+const actions: StoreActions = {
+  setThemeMode: ({ state, setState }, payload) => {
     const { bySystem } = state.theme
     setState!({
       theme: {
@@ -11,7 +11,7 @@ const actions = {
     })
   },
 
-  setThemeBySystem: ({ state, setState }: TStore, payload: boolean) => {
+  setThemeBySystem: ({ state, setState }, payload) => {
     const { mode } = state.theme
     setState!({
       theme: {
@@ -21,7 +21,7 @@ const actions = {
     })
   },
 
-  setAcessToken: ({ setState }: TStore, payload: string) => {
+  setAcessToken: ({ setState }, payload) => {
     setState!({
       user: {
         acessToken: payload,
@@ -29,7 +29,7 @@ const actions = {
     })
   },
 
-  removeAcessToken: ({ setState }: TStore) => {
+  removeAcessToken: ({ setState }) => {
     setState!({
       user: {
         acessToken: null,
@@ -37,12 +37,12 @@ const actions = {
     })
   },
 
-  toggleSidebar: ({ state, setState }: TStore) => {
+  toggleSidebar: ({ state, setState }) => {
     const { showSidebar } = state
     setState!({ showSidebar: !showSidebar })
   },
 
-  setSearching: ({ setState }: TStore, payload: boolean) => {
+  setSearching: ({ setState }, payload) => {
     setState!({
       search: {
         isSearching: payload,

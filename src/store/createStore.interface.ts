@@ -28,12 +28,27 @@ type OmitFirstArg<F> = F extends (state: any, ...args: infer P) => infer R
   ? (...args: P) => R
   : never
 
-
 export type TAssociateActions<T = any> = T extends { [K in keyof T]: T[K] }
   ? { [K in keyof T]: OmitFirstArg<T[K]> }
   : never
 
 export type TMapAssociateActions<P = any, A = any> = (actions: TAssociateActions<A>) => P
+
+type AssociateStoreForAction<
+  ActionList,
+  K extends keyof ActionList,
+  State,
+> = ActionList[K] extends () => infer R
+  ? (store: IStore<State, ActionList>) => R
+  : (
+    ActionList[K] extends (payload: infer P) => infer R
+    ? (store: IStore<State, ActionList>, payload: P) => R
+    : never
+  )
+
+export type Actions<State = any, ActionList = any> = ActionList extends { [K in keyof ActionList]: ActionList[K] }
+  ? { [K in keyof ActionList]: AssociateStoreForAction<ActionList, K, State> }
+  : never
 
 export interface IUseStore<State = any, Actions = any> {
   <TStateProps, TActionsProps>(

@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 import { setBooleanItemToLocalStorage } from 'src/helpers'
-import { useStore } from 'src/store'
+import { useStore } from 'src/hooks'
 
 const getDarkModeMediaQuery = () => window.matchMedia('(prefers-color-scheme: dark)')
 

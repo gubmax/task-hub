@@ -18,67 +18,78 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
   const { pathname } = useLocation()
   const [, { setSearching }] = useStore()
   const [, searchFetch] = useRequest({ url: SEARCH_URL, preload: true })
-  const [debounceSearch, searchImmediately] = useDebouncedCallback(() => {
-    if (value === '') {
-      return
-    }
+  const [debounceSearch, searchImmediately] = useDebouncedCallback(
+    () => {
+      if (value === '') {
+        return
+      }
 
-    if (pathname !== SEARCH_URL) {
-      history.push(SEARCH_URL)
-    }
+      if (pathname !== SEARCH_URL) {
+        history.push(SEARCH_URL)
+      }
 
-    setSearching(true)
-    searchFetch().finally(() => setSearching(false))
-  }, 500)
+      setSearching(true)
+      searchFetch().finally(() => setSearching(false))
+    },
+    500
+  )
 
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const isSearchPage = pathname === SEARCH_URL
 
-  const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value)
-    
-    debounceSearch()
-  }, [debounceSearch])
+  const onChangeHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.value)
+      debounceSearch()
+    },
+    [debounceSearch]
+  )
 
-  const onKeyPressHandler = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      searchImmediately()
-    }
-  }, [searchImmediately])
+  const onKeyPressHandler = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        searchImmediately()
+      }
+    },
+    [searchImmediately]
+  )
 
-  const clearValue = useCallback(() => {
-    if (value === '') {
-      history.goBack()
-      return
-    }
+  const clearValue = useCallback(
+    () => {
+      if (value === '') {
+        history.goBack()
+        return
+      }
 
-    setValue('')
-    inputRef.current!.focus()
-  }, [value, history])
+      setValue('')
+      inputRef.current!.focus()
+    },
+    [value, history]
+  )
 
-  return useMemo(() => (
-    <div className={`${s.wrapper} ${className}`}>
-      <SearchIcon
-        className={`${s.icon} ${s.searchIcon}`}
-        onClick={searchImmediately}
-        onKeyPress={searchImmediately}
-        role="button"
-        tabIndex={0}
-      />
-      <input
-        type="text"
-        className={s.input}
-        value={value}
-        ref={inputRef}
-        placeholder="Search"
-        onChange={onChangeHandler}
-        onKeyPress={onKeyPressHandler}
-      />
-      {
-        isSearchPage
-          && (
+  return useMemo(
+    () => (
+      <div className={`${s.wrapper} ${className}`}>
+        <SearchIcon
+          className={`${s.icon} ${s.searchIcon}`}
+          onClick={searchImmediately}
+          onKeyPress={searchImmediately}
+          role="button"
+          tabIndex={0}
+        />
+        <input
+          type="text"
+          className={s.input}
+          value={value}
+          ref={inputRef}
+          placeholder="Search"
+          onChange={onChangeHandler}
+          onKeyPress={onKeyPressHandler}
+        />
+        {
+          isSearchPage && (
             <ClearIcon
               className={`${s.icon} ${s.clearIcon}`}
               onClick={clearValue}
@@ -87,12 +98,14 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
               tabIndex={0}
             />
           )
-      }
-    </div>
-  ), [
-    className, onChangeHandler, onKeyPressHandler, clearValue,
-    value, searchImmediately, isSearchPage,
-  ])
+        }
+      </div>
+    ),
+    [
+      className, onChangeHandler, onKeyPressHandler, clearValue, 
+      value, searchImmediately, isSearchPage,
+    ]
+  )
 }
 
 export { SearchField }

@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useCallback } from 'react'
+import React, { FC , useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
 import { setBooleanItemToLocalStorage } from 'src/helpers'
@@ -8,7 +8,7 @@ import { SearchField, Loader } from 'src/components/elements'
 import { ReactComponent as MenuIcon } from 'src/static/images/icons/menu-24px.svg'
 import { ReactComponent as RefreshIcon } from 'src/static/images/icons/refresh-24px.svg'
 import { ReactComponent as SignOutIcon } from 'src/static/images/icons/sign-out-24px.svg'
-import { HeaderProps } from './Header.interface'
+import { HeaderProps } from './Header.types'
 import s from './Header.module.scss'
 
 const Header: FC<HeaderProps> = ({ iconWithLink }) => {
@@ -19,44 +19,52 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
     preload: true,
   })
 
-  const toggleSidebarMode = useCallback(() => {
-    setBooleanItemToLocalStorage('showSidebar', !showSidebar)
-    toggleSidebar()
-  }, [showSidebar, toggleSidebar])
+  const toggleSidebarMode = useCallback(
+    () => {
+      setBooleanItemToLocalStorage('showSidebar', !showSidebar)
+      toggleSidebar()
+    }, 
+    [showSidebar, toggleSidebar]
+  )
 
-  const menuIcon = useMemo(() => (
-    <MenuIcon
-      className={s.sidebarIcon}
-      onClick={iconWithLink ? undefined : toggleSidebarMode}
-      onKeyPress={toggleSidebarMode}
-      role="button"
-      tabIndex={0}
-    />
-  ), [iconWithLink, toggleSidebarMode])
+  const menuIcon = useMemo(
+    () => (
+      <MenuIcon
+        className={s.sidebarIcon}
+        onClick={iconWithLink ? undefined : toggleSidebarMode}
+        onKeyPress={toggleSidebarMode}
+        role="button"
+        tabIndex={0}
+      />
+    ),
+    [iconWithLink, toggleSidebarMode]
+  )
 
-  const menuIconTemplate = useMemo(() => (
-    iconWithLink
-      ? (
-        <Link
-          to={{
-            pathname: '/sidebar',
-            state: { 
-              isSidebar: true,
-              isModal: true,
-            },
-          }}
-        >
-          { menuIcon }
-        </Link>
-      )
-      : menuIcon
-  ), [iconWithLink, menuIcon])
+  const menuIconTemplate = useMemo(() => {
+    if (iconWithLink) {
+      const to = {
+        pathname: '/sidebar',
+        state: { 
+          isSidebar: true,
+          isModal: true,
+        },
+      }
+      return <Link to={to}>{menuIcon}</Link>
+    }
 
-  const syncTemplate = useMemo(() => (
-    isLoading
-      ? <Loader className={s.syncLoader} small />
-      : <RefreshIcon className={s.icon} onClick={fetchSync} />
-  ), [fetchSync, isLoading])
+    return menuIcon
+  }, [iconWithLink, menuIcon])
+
+  const syncIcon = useMemo(
+    () => {
+      if (isLoading) {
+        return <Loader className={s.syncLoader} small />
+      }
+
+      return <RefreshIcon className={s.icon} onClick={fetchSync} />
+    },
+    [isLoading, fetchSync]
+  )
 
   return useMemo(() => (
     <header className={s.header}>
@@ -68,11 +76,11 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
       </span>
       <SearchField className={s.search} />
       <div className={s.iconsBox}>
-        {syncTemplate}
+        {syncIcon}
         <SignOutIcon className={s.icon} onClick={signOut} />
       </div>
     </header>
-  ), [menuIconTemplate, syncTemplate, signOut])
+  ), [menuIconTemplate, signOut, syncIcon])
 }
 
 export { Header }

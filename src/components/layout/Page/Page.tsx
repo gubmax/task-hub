@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect, useMemo } from 'react'
 import { useHistory, Switch, Route } from 'react-router-dom'
 
+import { useBodyWidth } from  'src/hooks'
 import { ModalWindow, SwitchTransition } from 'src/components/elements'
 import { SignInPage } from 'src/components/pages'
 import { Header } from '../Header'
@@ -14,7 +15,6 @@ const SIGN_IN_LOCATION_PATHNAME = '/sign-in'
 const Page: FC = () => {
   const { location, goBack } = useHistory<LocationType>()
 
-  const [linkInHeader, setLinkInHeader] = useState(false)
   const [prevLocation, setPrevLocation] = useState(location)
 
   const { state } = location
@@ -31,28 +31,13 @@ const Page: FC = () => {
   }, [isModalLocation, location])
 
   // Toggle sidebar on resize document body
+  const [collapseSidebar] = useBodyWidth((width) => width <= 776)
+
   useEffect(() => {
-    const checkBodyWidth = () => document.body.offsetWidth <= 776
-
-    const onResize = () => {
-      const bodyIsNarrow = checkBodyWidth()
-  
-      if (linkInHeader !== bodyIsNarrow) {
-        setLinkInHeader(bodyIsNarrow)
-  
-        if (bodyIsNarrow === false && isSidebarLocation === true) {
-          goBack()
-        }
-      }
+    if (!collapseSidebar && isSidebarLocation) {
+      goBack()
     }
-
-    setLinkInHeader(checkBodyWidth())
-    window.addEventListener('resize', onResize)
-
-    return () => {
-      window.removeEventListener('resize', onResize)
-    }
-  }, [goBack, isSidebarLocation, linkInHeader])
+  }, [collapseSidebar, goBack, isSidebarLocation])
 
   const sidebarClassNames = useMemo(() => ({
     enter: s.sidebarEnter,
@@ -64,16 +49,16 @@ const Page: FC = () => {
   const sidebarTemplate = useMemo(() => {
     const { pathname } = currLocation
 
-    if (linkInHeader) {
+    if (collapseSidebar) {
       return (
         <ModalWindow path="/sidebar" transitionClassNames={sidebarClassNames}>
-          <Sidebar locationPathName={pathname} goBack={goBack} />
+          <Sidebar pathname={pathname} goBack={goBack} fullscreen />
         </ModalWindow>
       )
     }
 
-    return <Sidebar locationPathName={pathname} />
-  }, [goBack, linkInHeader, currLocation, sidebarClassNames])
+    return <Sidebar pathname={pathname} />
+  }, [goBack, collapseSidebar, currLocation, sidebarClassNames])
 
   return useMemo(() => (
     <SwitchTransition transitionKey={Number(isSwitchableLocation)}>
@@ -83,7 +68,7 @@ const Page: FC = () => {
         </Route>
         <Route path="*">
           <div className={s.base}>
-            <Header iconWithLink={linkInHeader} />
+            <Header iconWithLink={collapseSidebar} />
             <Main location={currLocation} />
             {sidebarTemplate}
           </div>
@@ -91,7 +76,7 @@ const Page: FC = () => {
       </Switch>
     </SwitchTransition>
   ), [
-    isSwitchableLocation, location, currLocation, linkInHeader,
+    isSwitchableLocation, location, currLocation, collapseSidebar,
     sidebarTemplate,
   ])
 }

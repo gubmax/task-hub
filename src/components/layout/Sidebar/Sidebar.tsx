@@ -1,19 +1,17 @@
 import React, { FC, useMemo, useCallback, MouseEvent, KeyboardEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
 
 import { useStore } from 'src/store'
 import { routes } from './routes'
 import { SidebarProps } from './Sidebar.interface'
 import s from './Sidebar.module.scss'
 
-const Sidebar: FC<SidebarProps> = ({ locationPathName, goBack }) => {
+const Sidebar: FC<SidebarProps> = ({ pathname, fullscreen = false, goBack }) => {
   const [{ showSidebar }] = useStore()
-  const history = useHistory()
 
   const getLinkClassName = useCallback((path: string) => (
-    `${s.listItem} ${locationPathName === path ? s.isActive : ''}`
-  ), [locationPathName])
+    `${s.listItem} ${pathname === path ? s.isActive : ''}`
+  ), [pathname])
 
   const onNavClick = useCallback((e: MouseEvent | KeyboardEvent) => (
     e.stopPropagation()
@@ -31,11 +29,16 @@ const Sidebar: FC<SidebarProps> = ({ locationPathName, goBack }) => {
     })
   ), [getLinkClassName])
 
+  const classNames = useMemo(() => (
+    [
+      s.wrapper,
+      fullscreen || showSidebar ? s.isShow : '',
+      fullscreen ? s.isFullscreen : '',
+    ].join(' ')
+  ), [fullscreen, showSidebar])
+
   return useMemo(() => (
-    <div
-      className={`${s.wrapper} ${showSidebar || goBack ? s.isShow : ''} ${goBack ? s.isFullscreen : ''}`}
-      onClick={history.goBack}
-    >
+    <div className={classNames} onClick={goBack}>
       <div
         className={s.nav}
         onClick={onNavClick}
@@ -49,8 +52,7 @@ const Sidebar: FC<SidebarProps> = ({ locationPathName, goBack }) => {
       </div>
     </div>
   ), [
-    goBack, onNavClick, routesTemplate, showSidebar,
-    history.goBack,
+    classNames, goBack, onNavClick, routesTemplate,
   ])
 }
 

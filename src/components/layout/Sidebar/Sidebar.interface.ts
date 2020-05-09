@@ -1,4 +1,5 @@
 export interface SidebarProps {
-  locationPathName: string,
+  pathname: string,
+  fullscreen?: boolean,
   goBack?: () => void,
 }

@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, memo } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 
 import { SwitchTransition } from 'src/components/elements'
@@ -6,10 +6,10 @@ import { Modal } from 'src/components/layout'
 import { ModalProps } from './ModalWindow.interface'
 import s from './ModalWindow.module.scss'
 
-const ModalWindow: FC<ModalProps> = ({ children, path, transitionClassNames }) => {
+const ModalWindow: FC<ModalProps> = memo(({ children, path, transitionClassNames }) => {
   const location = useLocation()
 
-  return useMemo(() => (
+  return (
     <SwitchTransition
       transitionKey={location.key}
       transitionClassNames={transitionClassNames}
@@ -24,7 +24,7 @@ const ModalWindow: FC<ModalProps> = ({ children, path, transitionClassNames }) =
         </Route>
       </Switch>
     </SwitchTransition>
-  ), [children, location, transitionClassNames, path])
-}
+  )
+})
 
 export { ModalWindow }

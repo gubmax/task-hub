@@ -1,4 +1,7 @@
-import React, { FC, useMemo, useCallback, MouseEvent, KeyboardEvent } from 'react'
+import React, {
+  FC, memo, useMemo, useCallback,
+  MouseEvent, KeyboardEvent,
+} from 'react'
 import { Link } from 'react-router-dom'
 
 import { useStore } from 'src/store'
@@ -6,7 +9,7 @@ import { routes } from './routes'
 import { SidebarProps } from './Sidebar.interface'
 import s from './Sidebar.module.scss'
 
-const Sidebar: FC<SidebarProps> = ({ pathname, fullscreen = false, goBack }) => {
+const Sidebar: FC<SidebarProps> = memo(({ pathname, fullscreen = false, goBack }) => {
   const [{ showSidebar }] = useStore()
 
   const getLinkClassName = useCallback((path: string) => (
@@ -37,7 +40,7 @@ const Sidebar: FC<SidebarProps> = ({ pathname, fullscreen = false, goBack }) => 
     ].join(' ')
   ), [fullscreen, showSidebar])
 
-  return useMemo(() => (
+  return (
     <div className={classNames} onClick={goBack}>
       <div
         className={s.nav}
@@ -51,9 +54,7 @@ const Sidebar: FC<SidebarProps> = ({ pathname, fullscreen = false, goBack }) => 
         </nav>
       </div>
     </div>
-  ), [
-    classNames, goBack, onNavClick, routesTemplate,
-  ])
-}
+  )
+})
 
 export { Sidebar }

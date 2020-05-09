@@ -1,10 +1,10 @@
-import React, { FC, useMemo, useCallback } from 'react'
+import React, { FC, memo, useMemo, useCallback } from 'react'
 
 import { Loader } from 'src/components/elements'
 import { ButtonProps } from './Button.interface'
 import s from './Button.module.scss'
 
-const Button: FC<ButtonProps> = ({
+const Button: FC<ButtonProps> = memo(({
   children: text, primary, large, loading,
   className, onClick,
 }) => {
@@ -25,7 +25,7 @@ const Button: FC<ButtonProps> = ({
     return onClick()
   }, [loading, onClick])
 
-  return useMemo(() => (
+  return (
     <button
       className={classNames}
       type="button"
@@ -33,7 +33,7 @@ const Button: FC<ButtonProps> = ({
     >
       {loading ? <Loader small white /> : text}
     </button>
-  ), [classNames, clickHandler, loading, text])
-}
+  )
+})
 
 export { Button }

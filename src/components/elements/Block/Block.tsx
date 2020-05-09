@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 
 import { BlockProps } from './Block.interface'
 import s from './Block.module.scss'
 
-const Block: FC<BlockProps> = ({ className, children }) => (
+const Block: FC<BlockProps> = memo(({ className, children }) => (
   <div className={`${s.block} ${className || ''}`}>{children}</div>
-)
+))
 
 export { Block }

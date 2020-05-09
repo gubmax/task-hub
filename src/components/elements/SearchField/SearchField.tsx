@@ -1,6 +1,6 @@
 import React, {
-  FC, useState, useRef, useCallback,
-  useMemo, ChangeEvent, KeyboardEvent,
+  FC, memo, useState, useRef,
+  useCallback, ChangeEvent, KeyboardEvent,
 } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ import { useStore } from 'src/store'
 
 const SEARCH_URL = '/search'
 
-const SearchField: FC<SearchFieldProps> = ({ className, collapse = false }) => {
+const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false }) => {
   const history = useHistory()
   const { pathname } = useLocation()
   const [, { setSearching }] = useStore()
@@ -93,49 +93,45 @@ const SearchField: FC<SearchFieldProps> = ({ className, collapse = false }) => {
     [value, history]
   )
 
-  return useMemo(
-    () => (
-      <div
-        className={`${s.wrapper} ${className} ${collapse && collapseField ? s.isCollapse : ''}`}
-        ref={elRef}
-      >
-        <input
-          type="text"
-          className={s.input}
-          value={value}
-          ref={inputRef}
-          placeholder="Search"
-          onChange={onChangeHandler}
-          onKeyPress={onKeyPressHandler}
-        />
-        <SearchIcon
-          className={`${s.icon} ${s.searchIcon}`}
-          onClick={onSearchHandler}
-          onKeyPress={onSearchHandler}
-          role="button"
-          tabIndex={0}
-        />
-        {
-          (isSearchPage || value)
-          && (!collapse || (collapse && !collapseField))
-          && (
-            <ClearIcon
-              className={`${s.icon} ${s.clearIcon}`}
-              onClick={clearValue}
-              onKeyPress={clearValue}
-              role="button"
-              tabIndex={0}
-            />
-          )
-        }
-      </div>
-    ),
-    [
-      className, onChangeHandler, onKeyPressHandler, clearValue, 
-      value, onSearchHandler, isSearchPage, collapseField,
-      collapse, elRef,
-    ]
+  const classNames = [
+    s.wrapper,
+    collapse && collapseField ? s.isCollapse : '',
+    className,
+  ].join(' ')
+
+  return (
+    <div className={classNames} ref={elRef}>
+      <input
+        type="text"
+        className={s.input}
+        value={value}
+        ref={inputRef}
+        placeholder="Search"
+        onChange={onChangeHandler}
+        onKeyPress={onKeyPressHandler}
+      />
+      <SearchIcon
+        className={`${s.icon} ${s.searchIcon}`}
+        onClick={onSearchHandler}
+        onKeyPress={onSearchHandler}
+        role="button"
+        tabIndex={0}
+      />
+      {
+        (isSearchPage || value)
+        && (!collapse || (collapse && !collapseField))
+        && (
+          <ClearIcon
+            className={`${s.icon} ${s.clearIcon}`}
+            onClick={clearValue}
+            onKeyPress={clearValue}
+            role="button"
+            tabIndex={0}
+          />
+        )
+      }
+    </div>
   )
-}
+})
 
 export { SearchField }

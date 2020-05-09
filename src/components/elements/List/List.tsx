@@ -1,12 +1,13 @@
 import React, {
-  FC, ReactElement, Children, cloneElement,
+  FC, memo, ReactElement, Children,
+  cloneElement,
 } from 'react'
 
 import { Block } from '../Block'
 import { ListProps } from './List.interface'
 import s from './List.module.scss'
 
-const List: FC<ListProps> = ({ className, text, children }) => {
+const List: FC<ListProps> = memo(({ className, text, children }) => {
   const addClassToChild = (child: ReactElement) => {
     const { className: childClassName } = child.props
 
@@ -33,6 +34,6 @@ const List: FC<ListProps> = ({ className, text, children }) => {
       </Block>
     </>
   )
-}
+})
 
 export { List }

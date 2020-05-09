@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useCallback } from 'react'
+import React, { FC, memo, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
 import { setBooleanItemToLocalStorage } from 'src/helpers'
@@ -10,7 +10,7 @@ import { ReactComponent as SignOutIcon } from 'src/static/images/icons/sign-out-
 import { HeaderProps } from './Header.types'
 import s from './Header.module.scss'
 
-const Header: FC<HeaderProps> = ({ iconWithLink }) => {
+const Header: FC<HeaderProps> = memo(({ iconWithLink }) => {
   const [{ showSidebar }, { toggleSidebar }] = useStore()
   const [, { signOut }] = useAuth()
 
@@ -55,7 +55,7 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
     return menuIcon
   }, [iconWithLink, menuIcon])
 
-  return useMemo(() => (
+  return (
     <header className={s.header}>
       {menuIconTemplate}
       <span className={s.title}>
@@ -68,7 +68,7 @@ const Header: FC<HeaderProps> = ({ iconWithLink }) => {
         <SignOutIcon className={s.icon} onClick={signOut} />
       </div>
     </header>
-  ), [menuIconTemplate, signOut, collapseSearch])
-}
+  )
+})
 
 export { Header }

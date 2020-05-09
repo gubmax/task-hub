@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, memo, useMemo } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
@@ -6,7 +6,7 @@ import { routes } from './routes'
 import { MainProps } from './Main.interface'
 import s from './Main.module.scss'
 
-const Main: FC<MainProps> = ({ location }) => {
+const Main: FC<MainProps> = memo(({ location }) => {
   const routeTransitionClassNames = useMemo(() => ({
     enter: s.routeEnter,
     enterActive: s.routeEnterActive,
@@ -28,7 +28,7 @@ const Main: FC<MainProps> = ({ location }) => {
     ))
   ), [])
 
-  return useMemo(() => (
+  return (
     <main className={s.main}>
       <TransitionGroup component={null}>
         <CSSTransition
@@ -42,7 +42,7 @@ const Main: FC<MainProps> = ({ location }) => {
         </CSSTransition>
       </TransitionGroup>
     </main>
-  ), [location, routeTransitionClassNames, routesTemplate])
-}
+  )
+})
 
 export { Main }

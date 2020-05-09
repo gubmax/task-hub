@@ -1,13 +1,14 @@
-import React, { FC, useMemo } from 'react'
+import React, { FC, memo, useMemo } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
-import { CSSTransitionClassNames } from 'react-transition-group/CSSTransition'
+import {SwitchTransitionProps} from './SwitchTransition.interface'
 import s from './SwitchTransition.module.scss'
 
-const SwitchTransition: FC<{
-  transitionKey?: string | number,
-  transitionClassNames?: CSSTransitionClassNames,
-}> = ({ children, transitionKey, transitionClassNames }) => {
+const SwitchTransition: FC<SwitchTransitionProps> = memo(({
+  children,
+  transitionKey,
+  transitionClassNames,
+}) => {
   const switchTransitionClassNames = useMemo(() => {
     const { enter, enterActive, exit, exitActive } = transitionClassNames || {}
     return {
@@ -19,7 +20,7 @@ const SwitchTransition: FC<{
     }
   }, [transitionClassNames])
 
-  return useMemo(() => (
+  return (
     <TransitionGroup component={null}>
       <CSSTransition
         key={transitionKey}
@@ -29,7 +30,7 @@ const SwitchTransition: FC<{
         {children}
       </CSSTransition>
     </TransitionGroup>
-  ), [transitionKey, switchTransitionClassNames, children])
-}
+  )
+})
 
 export { SwitchTransition }

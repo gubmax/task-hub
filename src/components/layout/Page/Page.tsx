@@ -1,4 +1,7 @@
-import React, { FC, useState, useEffect, useMemo } from 'react'
+import React, {
+  FC, memo, useState, useEffect,
+  useMemo,
+} from 'react'
 import { useHistory, Switch, Route } from 'react-router-dom'
 
 import { useBodyWidth } from  'src/hooks'
@@ -12,7 +15,7 @@ import s from './Page.module.scss'
 
 const SIGN_IN_LOCATION_PATHNAME = '/sign-in'
 
-const Page: FC = () => {
+const Page: FC = memo(() => {
   const { location, goBack } = useHistory<LocationType>()
 
   const [prevLocation, setPrevLocation] = useState(location)
@@ -60,7 +63,7 @@ const Page: FC = () => {
     return <Sidebar pathname={pathname} />
   }, [goBack, collapseSidebar, currLocation, sidebarClassNames])
 
-  return useMemo(() => (
+  return (
     <SwitchTransition transitionKey={Number(isSwitchableLocation)}>
       <Switch location={location}>
         <Route path={SIGN_IN_LOCATION_PATHNAME}>
@@ -75,10 +78,7 @@ const Page: FC = () => {
         </Route>
       </Switch>
     </SwitchTransition>
-  ), [
-    isSwitchableLocation, location, currLocation, collapseSidebar,
-    sidebarTemplate,
-  ])
-}
+  )
+})
 
 export { Page }

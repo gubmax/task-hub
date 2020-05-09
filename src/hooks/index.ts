@@ -1,4 +1,5 @@
 export { useAuth } from './useAuth'
+export { useBodyWidth } from './useBodyWidth'
 export { useRequest } from './useRequest'
 export { useDebouncedCallback } from './useDebouncedCallback'
 export { useTheme } from './useTheme'

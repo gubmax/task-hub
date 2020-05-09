@@ -1,5 +1,6 @@
 export { useAuth } from './useAuth'
 export { useBodyWidth } from './useBodyWidth'
+export { useClickOutside } from './useClickOutside'
 export { useRequest } from './useRequest'
 export { useDebouncedCallback } from './useDebouncedCallback'
 export { useTheme } from './useTheme'

@@ -1,4 +1,4 @@
-import React, { FC, ComponentType, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
@@ -15,20 +15,17 @@ const Main: FC<MainProps> = ({ location }) => {
   }), [])
 
   const routesTemplate = useMemo(() => (
-    routes.map(({ path, exact, component }) => {
-      const RouteComponent = component as ComponentType<any>
-      return (
-        <Route
-          key={path as string}
-          path={path}
-          exact={exact}
-        >
-          <div className={s.wrapper}>
-            <RouteComponent />
-          </div>
-        </Route>
-      )
-    })
+    routes.map(({ path, exact, component: RouteComponent }) => (
+      <Route
+        key={path as string}
+        path={path}
+        exact={exact}
+      >
+        <div className={s.wrapper}>
+          <RouteComponent />
+        </div>
+      </Route>
+    ))
   ), [])
 
   return useMemo(() => (

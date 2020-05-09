@@ -1,10 +1,15 @@
+import { ComponentType } from 'react'
 import { RouteProps } from 'react-router'
 
 import {
   ProjectsPage, CalendarPage, ReviewPage, InfoPage, SearchPage, SettingsPage,
 } from 'src/components/pages'
 
-const routes: RouteProps[] = [
+interface Route extends RouteProps {
+  component: ComponentType,
+}
+
+const routes: Route[] = [
   {
     path: '/',
     exact: true,

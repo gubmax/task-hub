@@ -1,35 +1,64 @@
 .wrapper {
-  max-width: 640px;
   position: relative;
+  max-width: 640px;
   width: 100%;
+  transition: width 0.15s;
+
+  &.isCollapse {
+    width: 46px;
+    min-width: 46px;
+
+    & > .input {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
 }
 
 .input {
+  height: 46px;
   background: var(--color-light);
   border-radius: 20px;
   border-width: 0;
   box-sizing: border-box;
-  color: var(--color-primary);
+  color: var(--color-darker);
   font-family: inherit;
   font-size: 1.15rem;
   line-height: 1em;
   padding: 12px 48px 12px 48px;
   width: 100%;
+  transition:
+    0.15s color,
+    0.15s box-shadow,
+    0.15s visibility,
+    0.15s opacity;
+  border: 1px solid var(--color-light);
 
   &::placeholder {
     color: var(--color-darker);
     font-size: inherit;
   }
+
+  &:focus {
+    background: var(--color-lighter);
+    box-shadow: 0 0 0 4px var(--color-accent-light);
+    border-color: var(--color-accent);
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--color-primary);
+  }
 }
 
 .icon {
+  top: 0;
   border-radius: 50%;
   cursor: pointer;
   fill: var(--color-darker);
   height: 24px;
-  padding: 6px;
+  padding: 11px;
   position: absolute;
-  top: 3px;
   transition: fill .2s, background .2s;
   width: 24px;
 
@@ -45,11 +74,11 @@
 }
 
 .searchIcon {
-  left: 6px;
+  left: 0;
 }
 
 .clearIcon {
-  right: 6px;
+  right: 0;
 }
 
 @media (max-width: 776px) {

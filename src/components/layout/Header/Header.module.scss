@@ -1,4 +1,6 @@
 .header {
+  position: relative;
+  height: 56px;
   align-items: center;
   background: var(--color-lighter);
   border-width: 0 1px 1px 1px;
@@ -34,7 +36,7 @@
 
 .icon {
   height: 24px;
-  margin-left: 12px;
+  margin-left: 32px;
   min-width: 24px;
   padding: 11px;
   width: 24px;
@@ -76,33 +78,32 @@
 
 .iconsBox {
   display: flex;
-  margin-left: 13px;
-}
-
-.syncLoader {
-  padding: 13px;
-  margin-left: 12px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 @media (max-width: 776px) {
 
   .header {
     flex-wrap: wrap;
-    padding: 16px;
-  }
-
-  .search {
-    align-self: flex-end;
-    margin-top: 12px;
-    order: 1;
+    padding: 0 16px;
   }
 
   .iconsBox {
-    margin-left: auto;
+    position: absolute;
+    right: 0;
+    padding: 0 16px;
+    pointer-events: none;
+  }
+
+  .search {
+    margin-right: 0;
+    pointer-events: all;
   }
 
   .icon {
-    margin-left: 0;
+    margin-left: 8px;
+    pointer-events: all;
   }
 
   .title {

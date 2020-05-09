@@ -4,7 +4,7 @@ import React, {
 } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-import { useRequest, useDebouncedCallback } from 'src/hooks'
+import { useRequest, useDebouncedCallback, useClickOutside } from 'src/hooks'
 import { ReactComponent as SearchIcon } from 'src/static/images/icons/search-24px.svg'
 import { ReactComponent as ClearIcon } from 'src/static/images/icons/clear-24px.svg'
 import { SearchFieldProps } from './SearchField.interface'
@@ -13,31 +13,54 @@ import { useStore } from 'src/store'
 
 const SEARCH_URL = '/search'
 
-const SearchField: FC<SearchFieldProps> = ({ className }) => {
+const SearchField: FC<SearchFieldProps> = ({ className, collapse = false }) => {
   const history = useHistory()
   const { pathname } = useLocation()
   const [, { setSearching }] = useStore()
   const [, searchFetch] = useRequest({ url: SEARCH_URL, preload: true })
-  const [debounceSearch, searchImmediately] = useDebouncedCallback(
-    () => {
-      if (value === '') {
-        return
-      }
 
-      if (pathname !== SEARCH_URL) {
-        history.push(SEARCH_URL)
-      }
+  // Debouncing search
+  const [debounceSearch, searchImmediately] = useDebouncedCallback(() => {
+    if (value === '') {
+      return
+    }
 
-      setSearching(true)
-      searchFetch().finally(() => setSearching(false))
-    },
-    500
-  )
+    if (pathname !== SEARCH_URL) {
+      history.push(SEARCH_URL)
+    }
 
+    setSearching(true)
+    searchFetch().finally(() => setSearching(false))
+  }, 500)
+
+  const [collapseField, setCollapseField] = useState(collapse)
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
   const isSearchPage = pathname === SEARCH_URL
+
+  const elRef = useClickOutside<HTMLDivElement>(
+    () => collapse && setCollapseField(true),
+    !collapseField,
+  )
+
+  const onSearchHandler = useCallback(() => {
+    const inputNode = inputRef.current!
+
+    if (collapseField) {
+      setCollapseField(false)
+
+      inputNode.ontransitionend = () => {
+        inputNode.focus()
+        inputNode.ontransitionend = null
+      }
+
+      return
+    }
+
+    searchImmediately()
+    inputNode.focus()
+  }, [collapseField, searchImmediately])
 
   const onChangeHandler = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,7 +81,8 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
 
   const clearValue = useCallback(
     () => {
-      if (value === '') {
+      if (!value.length) {
+        setCollapseField(true)
         history.goBack()
         return
       }
@@ -71,14 +95,10 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
 
   return useMemo(
     () => (
-      <div className={`${s.wrapper} ${className}`}>
-        <SearchIcon
-          className={`${s.icon} ${s.searchIcon}`}
-          onClick={searchImmediately}
-          onKeyPress={searchImmediately}
-          role="button"
-          tabIndex={0}
-        />
+      <div
+        className={`${s.wrapper} ${className} ${collapse && collapseField ? s.isCollapse : ''}`}
+        ref={elRef}
+      >
         <input
           type="text"
           className={s.input}
@@ -88,8 +108,17 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
           onChange={onChangeHandler}
           onKeyPress={onKeyPressHandler}
         />
+        <SearchIcon
+          className={`${s.icon} ${s.searchIcon}`}
+          onClick={onSearchHandler}
+          onKeyPress={onSearchHandler}
+          role="button"
+          tabIndex={0}
+        />
         {
-          isSearchPage && (
+          (isSearchPage || value)
+          && (!collapse || (collapse && !collapseField))
+          && (
             <ClearIcon
               className={`${s.icon} ${s.clearIcon}`}
               onClick={clearValue}
@@ -103,7 +132,8 @@ const SearchField: FC<SearchFieldProps> = ({ className }) => {
     ),
     [
       className, onChangeHandler, onKeyPressHandler, clearValue, 
-      value, searchImmediately, isSearchPage,
+      value, onSearchHandler, isSearchPage, collapseField,
+      collapse, elRef,
     ]
   )
 }

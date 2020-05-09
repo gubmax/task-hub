@@ -38,10 +38,6 @@ const useDebouncedCallback = <T extends (...args: any[]) => any>(
   }, [cancelDebouncedCallback, delay])
 
   const callDebouncedCallbackImmediately = (...args: any[]) => {
-    if (!timeoutHandler.current) {
-      return
-    }
-
     if (isComponentUnmounted.current === false) {
       debouncedFunction.current(...args)
     }

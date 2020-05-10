@@ -2,15 +2,12 @@
 import { useState, useEffect, useMemo } from 'react'
 
 import {
-  ICreateStore, TListener, IStore, IAssociatedUseStore,
-  TAssociateActions, TActions, TState,
+  ICreateStore, TListener, IStore, TMapState,
+  TMapAssociateActions, TAssociateActions, TActions, TState,
+  TSetState, IUseStore,
 } from './store.interface'
 
-const setState = (
-  store: IStore,
-  newState: TState,
-  afterUpdateCallback: (...args: any[]) => any,
-) => {
+const setState: TSetState = (store, newState, afterUpdateCallback) => {
   store.state = { ...store.state, ...newState }
 
   store.listeners.forEach((listener) => {
@@ -23,9 +20,9 @@ const setState = (
 }
 
 const associateActions = (store: IStore, actions: TActions): TAssociateActions => {
-  const associatedActions: any = {};
+  const associatedActions: TAssociateActions = {};
 
-  (Object.keys(actions) as Array<string>).forEach((key) => {
+  Object.keys(actions).forEach((key) => {
     if (typeof actions[key] === 'function') {
       associatedActions[key] = actions[key].bind(null, store)
       return
@@ -35,15 +32,15 @@ const associateActions = (store: IStore, actions: TActions): TAssociateActions =
     }
   })
 
-  return associatedActions as TAssociateActions
+  return associatedActions
 }
 
-const useStore = (store: IStore, mapState: any, mapActions: any) => {
+const useStore = (store: IStore, mapState: TMapState, mapActions: TMapAssociateActions) => {
   const [, setStoreState] = useState()
 
   const state = mapState ? mapState(store.state) : store.state
   const actions = useMemo(
-    () => (mapActions ? mapActions(store.actions) : store.actions),
+    () => (store.actions && mapActions ? mapActions(store.actions) : store.actions),
     [mapActions, store.actions],
   )
 
@@ -81,12 +78,16 @@ const createStore: ICreateStore = (initialState, actions) => {
   const store: IStore = {
     state: initialState,
     listeners: [],
+    setState: () => {},
   }
 
   store.setState = setState.bind(null, store)
-  store.actions = associateActions(store, actions)
 
-  return useStore.bind(null, store) as IAssociatedUseStore
+  if (actions) {
+    store.actions = associateActions(store, actions) 
+  }
+
+  return useStore.bind(null, store) as IUseStore
 }
 
 export { createStore }

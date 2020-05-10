@@ -3,7 +3,7 @@ import { StoreActions } from './actions.interface'
 const actions: StoreActions = {
   setThemeMode: ({ state, setState }, payload) => {
     const { bySystem } = state.theme
-    setState!({
+    setState({
       theme: {
         bySystem,
         mode: payload,
@@ -13,7 +13,7 @@ const actions: StoreActions = {
 
   setThemeBySystem: ({ state, setState }, payload) => {
     const { mode } = state.theme
-    setState!({
+    setState({
       theme: {
         bySystem: payload,
         mode,
@@ -22,7 +22,7 @@ const actions: StoreActions = {
   },
 
   setAcessToken: ({ setState }, payload) => {
-    setState!({
+    setState({
       user: {
         acessToken: payload,
       },
@@ -30,7 +30,7 @@ const actions: StoreActions = {
   },
 
   removeAcessToken: ({ setState }) => {
-    setState!({
+    setState({
       user: {
         acessToken: null,
       },
@@ -39,11 +39,11 @@ const actions: StoreActions = {
 
   toggleSidebar: ({ state, setState }) => {
     const { showSidebar } = state
-    setState!({ showSidebar: !showSidebar })
+    setState({ showSidebar: !showSidebar })
   },
 
   setSearching: ({ setState }, payload) => {
-    setState!({
+    setState({
       search: {
         isSearching: payload,
       },

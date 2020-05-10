@@ -1,5 +1,6 @@
 export { Block } from './Block'
 export { Button } from './Button'
+export { Form } from './Form'
 export { List } from './List'
 export { Loader } from './Loader'
 export { SearchField } from './SearchField'

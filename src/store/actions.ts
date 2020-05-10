@@ -1,9 +1,9 @@
-import { TTheme, TStore } from './state.interface'
+import { StoreActions } from './actions.interface'
 
-const actions = {
-  setThemeMode: ({ state, setState }: TStore, payload: TTheme) => {
+const actions: StoreActions = {
+  setThemeMode: ({ state, setState }, payload) => {
     const { bySystem } = state.theme
-    setState!({
+    setState({
       theme: {
         bySystem,
         mode: payload,
@@ -11,9 +11,9 @@ const actions = {
     })
   },
 
-  setThemeBySystem: ({ state, setState }: TStore, payload: boolean) => {
+  setThemeBySystem: ({ state, setState }, payload) => {
     const { mode } = state.theme
-    setState!({
+    setState({
       theme: {
         bySystem: payload,
         mode,
@@ -21,29 +21,29 @@ const actions = {
     })
   },
 
-  setAcessToken: ({ setState }: TStore, payload: string) => {
-    setState!({
+  setAcessToken: ({ setState }, payload) => {
+    setState({
       user: {
         acessToken: payload,
       },
     })
   },
 
-  removeAcessToken: ({ setState }: TStore) => {
-    setState!({
+  removeAcessToken: ({ setState }) => {
+    setState({
       user: {
         acessToken: null,
       },
     })
   },
 
-  toggleSidebar: ({ state, setState }: TStore) => {
+  toggleSidebar: ({ state, setState }) => {
     const { showSidebar } = state
-    setState!({ showSidebar: !showSidebar })
+    setState({ showSidebar: !showSidebar })
   },
 
-  setSearching: ({ setState }: TStore, payload: boolean) => {
-    setState!({
+  setSearching: ({ setState }, payload) => {
+    setState({
       search: {
         isSearching: payload,
       },

@@ -4,12 +4,11 @@ import React, {
 } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-import { useRequest, useDebouncedCallback, useClickOutside } from 'src/hooks'
+import { useStore, useRequest, useDebouncedCallback, useClickOutside } from 'src/hooks'
 import { ReactComponent as SearchIcon } from 'src/static/images/icons/search-24px.svg'
 import { ReactComponent as ClearIcon } from 'src/static/images/icons/clear-24px.svg'
 import { SearchFieldProps } from './SearchField.interface'
 import s from './SearchField.module.scss'
-import { useStore } from 'src/store'
 
 const SEARCH_URL = '/search'
 

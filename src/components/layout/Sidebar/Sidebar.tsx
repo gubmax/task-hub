@@ -4,7 +4,7 @@ import React, {
 } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useStore } from 'src/store'
+import { useStore } from 'src/hooks'
 import { routes } from './routes'
 import { SidebarProps } from './Sidebar.interface'
 import s from './Sidebar.module.scss'

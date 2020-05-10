@@ -15,39 +15,56 @@ export type TActions<Actions = any> = {
     : Actions[K]
 }
 
+export type TSetState = (
+  store: IStore,
+  newState: TState,
+  afterUpdateCallback?: (...args: any[]) => any,
+) => void
+
+export type TAssociateSetState = (newState: TState) => void
+
 export interface IStore<State = any, Actions = any> {
   state: TState<State>,
   listeners: TListener<State>[],
-  setState?: (...args: any[]) => any,
+  setState: TAssociateSetState,
   actions?: TActions<Actions>,
 }
 
-export type TMapProp<P, A> = (arg: A) => P
+export type TMapState<P = any, A = any> = (arg: A) => P
 
 type OmitFirstArg<F> = F extends (state: any, ...args: infer P) => infer R
   ? (...args: P) => R
   : never
 
-
-export type TAssociateActions<T = any> = T extends { [K in keyof T]: T[K] }
-  ? { [K in keyof T]: OmitFirstArg<T[K]> }
-  : never
+export type TAssociateActions<T = any> = {
+  [K in keyof T]: T[K] extends Function
+    ? OmitFirstArg<T[K]>
+    : TAssociateActions<T[K]>
+}
 
 export type TMapAssociateActions<P = any, A = any> = (actions: TAssociateActions<A>) => P
 
-export interface IUseStore<State = any, Actions = any> {
-  <TStateProps, TActionsProps>(
-    store: IStore<State, Actions>,
-    mapState?: TMapProp<TStateProps, State>,
-    mapActions?: TMapProp<TActionsProps, Actions>,
-  ): [TStateProps, TActionsProps]
-}
+type AssociateStoreForAction<
+  ActionList,
+  K extends keyof ActionList,
+  State,
+> = ActionList[K] extends () => infer R
+  ? (store: IStore<State, ActionList>) => R
+  : (
+    ActionList[K] extends (payload: infer P) => infer R
+    ? (store: IStore<State, ActionList>, payload: P) => R
+    : never
+  )
 
-export interface IAssociatedUseStore<State = any, Actions = any> {
+export type Actions<State = any, ActionList = any> = ActionList extends { [K in keyof ActionList]: ActionList[K] }
+  ? { [K in keyof ActionList]: AssociateStoreForAction<ActionList, K, State> }
+  : never
+
+export interface IUseStore<State = any, Actions = any> {
   (): [State, TAssociateActions<Actions>]
 
   <TStateProps = {}, TActionsProps = {}>(
-    mapState: TMapProp<TStateProps, State>,
+    mapState: TMapState<TStateProps, State>,
     mapActions: TMapAssociateActions<TActionsProps, Actions>,
   ): [TStateProps, TActionsProps]
 
@@ -57,7 +74,7 @@ export interface IAssociatedUseStore<State = any, Actions = any> {
   ): [State, TActionsProps]
 
   <TStateProps = {}, noActions = {}>(
-    mapState: TMapProp<TStateProps, State>,
+    mapState: TMapState<TStateProps, State>,
     mapActions?: null | undefined,
   ): [TStateProps, TAssociateActions<Actions>]
 
@@ -70,6 +87,6 @@ export interface IAssociatedUseStore<State = any, Actions = any> {
 export interface ICreateStore {
   <State, Actions>(
     initialState: TState<State>,
-    actions: TActions<Actions>,
-  ): IAssociatedUseStore<State, Actions>
+    actions?: TActions<Actions>,
+  ): IUseStore<State, Actions>
 }

@@ -1,8 +1,7 @@
 import { useMemo, useCallback } from 'react'
 import { useHistory } from "react-router-dom"
 
-import { useRequest, } from 'src/hooks'
-import { useStore } from 'src/store'
+import { useStore, useRequest, } from 'src/hooks'
 import { UseAuth } from './useAuth.interface'
 
 const ACCESS_TOKEN = 'access-token'

@@ -5,8 +5,10 @@ import { ButtonProps } from './Button.types'
 import s from './Button.module.scss'
 
 const Button: FC<ButtonProps> = memo(({
-  children: text, primary, large, loading,
-  className, onClick,
+  children: text,
+  type = 'button',
+  primary, large, loading, className,
+  onClick,
 }) => {
   const classNames = useMemo(() => (
     [
@@ -22,13 +24,15 @@ const Button: FC<ButtonProps> = memo(({
       return
     }
 
-    return onClick()
+    if (onClick) {
+      return onClick()
+    }
   }, [loading, onClick])
 
   return (
     <button
       className={classNames}
-      type="button"
+      type={type}
       onClick={clickHandler}
     >
       {loading ? <Loader small white /> : text}

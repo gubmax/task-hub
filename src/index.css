@@ -52,6 +52,18 @@ a {
   min-height: 100%;
 }
 
+input:-webkit-autofill {
+  animation-name: autofill;
+  animation-fill-mode: both;
+}
+
+@keyframes autofill {
+  to {
+    color: inherit;
+    background: var(--color-light);
+  }
+}
+
 :root {
   --color-lighter: rgb(255, 255, 255);
   --color-light: rgb(245, 245, 245);

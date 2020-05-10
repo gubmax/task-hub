@@ -1,11 +1,11 @@
 import { getBooleanItemFromLocalStorage } from 'src/helpers'
-import { TTheme, TState } from './state.types'
+import { Theme, MainState } from './state.types'
 
 const showSidebar = getBooleanItemFromLocalStorage('showSidebar')
 const bySystem = getBooleanItemFromLocalStorage('themeBySystem')
-const currTheme = localStorage.getItem('theme') as TTheme || null
+const currTheme = localStorage.getItem('theme') as Theme || null
 
-const initialState: TState = {
+const initialState: MainState = {
   theme: {
     bySystem: (bySystem === null && currTheme === null) || Boolean(bySystem),
     mode: currTheme || 'light',

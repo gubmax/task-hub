@@ -1,11 +1,11 @@
-import { IStore } from './store.types'
+import { Store } from './store.types'
 
-export type TTheme = 'dark' | 'light'
+export type Theme = 'dark' | 'light'
 
-export type TState = {
+export type MainState = {
   theme: {
     bySystem: boolean,
-    mode: TTheme,
+    mode: Theme,
   },
   user: {
     accessToken: string | null,
@@ -15,5 +15,3 @@ export type TState = {
     isSearching: boolean,
   }
 }
-
-export type TStore = IStore<TState>

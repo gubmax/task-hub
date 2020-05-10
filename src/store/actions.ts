@@ -1,6 +1,6 @@
-import { StoreActions } from './actions.types'
+import { MainActions } from './actions.types'
 
-const actions: StoreActions = {
+const actions: MainActions = {
   setThemeMode: ({ state, setState }, payload) => {
     const { bySystem } = state.theme
     setState({
@@ -24,7 +24,7 @@ const actions: StoreActions = {
   setAcessToken: ({ setState }, payload) => {
     setState({
       user: {
-        acessToken: payload,
+        accessToken: payload,
       },
     })
   },
@@ -32,7 +32,7 @@ const actions: StoreActions = {
   removeAcessToken: ({ setState }) => {
     setState({
       user: {
-        acessToken: null,
+        accessToken: null,
       },
     })
   },

@@ -2,12 +2,12 @@
 import { useState, useEffect, useMemo } from 'react'
 
 import {
-  ICreateStore, TListener, IStore, TMapState,
-  TMapAssociateActions, TAssociateActions, TActions, TState,
-  TSetState, IUseStore,
+  CreateStore, Listener, Store, MapState,
+  MapActions, AssociatedActions, StoreActions, State,
+  StoreSetState, UseStore,
 } from './store.types'
 
-const setState: TSetState = (store, newState, afterUpdateCallback) => {
+const setState: StoreSetState = (store, newState, afterUpdateCallback) => {
   store.state = { ...store.state, ...newState }
 
   store.listeners.forEach((listener) => {
@@ -19,8 +19,8 @@ const setState: TSetState = (store, newState, afterUpdateCallback) => {
   }
 }
 
-const associateActions = (store: IStore, actions: TActions): TAssociateActions => {
-  const associatedActions: TAssociateActions = {};
+const associateActions = (store: Store, actions: StoreActions): AssociatedActions => {
+  const associatedActions: AssociatedActions = {};
 
   Object.keys(actions).forEach((key) => {
     if (typeof actions[key] === 'function') {
@@ -35,7 +35,7 @@ const associateActions = (store: IStore, actions: TActions): TAssociateActions =
   return associatedActions
 }
 
-const useStore = (store: IStore, mapState: TMapState, mapActions: TMapAssociateActions) => {
+const useStore = (store: Store, mapState: MapState, mapActions: MapActions) => {
   const [, setStoreState] = useState()
 
   const state = mapState ? mapState(store.state) : store.state
@@ -45,11 +45,11 @@ const useStore = (store: IStore, mapState: TMapState, mapActions: TMapAssociateA
   )
 
   useEffect(() => {
-    const newListener: TListener = {
+    const newListener: Listener = {
       prevState: {},
     }
 
-    const setStoreMappedState = (newState: TState) => {
+    const setStoreMappedState = (newState: State) => {
       const mappedState = mapState!(newState)
 
       if (mappedState !== newListener.prevState) {
@@ -74,8 +74,8 @@ const useStore = (store: IStore, mapState: TMapState, mapActions: TMapAssociateA
   return [state, actions]
 }
 
-const createStore: ICreateStore = (initialState, actions) => {
-  const store: IStore = {
+const createStore: CreateStore = (initialState, actions) => {
+  const store: Store = {
     state: initialState,
     listeners: [],
     setState: () => {},
@@ -87,7 +87,7 @@ const createStore: ICreateStore = (initialState, actions) => {
     store.actions = associateActions(store, actions) 
   }
 
-  return useStore.bind(null, store) as IUseStore
+  return useStore.bind(null, store) as UseStore
 }
 
 export { createStore }

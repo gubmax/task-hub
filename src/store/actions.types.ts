@@ -1,8 +1,8 @@
-import { TTheme, TState } from './state.types'
+import { Theme, MainState } from './state.types'
 import { Actions } from './store.types'
 
 export type ActionList = {
-  setThemeMode: (payload: TTheme) => void,
+  setThemeMode: (payload: Theme) => void,
   setThemeBySystem: (payload: boolean) => void,
   setAcessToken: (payload: string) => void,
   removeAcessToken: () => void,
@@ -10,4 +10,4 @@ export type ActionList = {
   setSearching: (payload: boolean) => void,
 }
 
-export type StoreActions = Actions<TState, ActionList>
+export type MainActions = Actions<MainState, ActionList>

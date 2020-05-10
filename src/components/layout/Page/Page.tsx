@@ -10,7 +10,7 @@ import { SignInPage } from 'src/components/pages'
 import { Header } from '../Header'
 import { Sidebar } from '../Sidebar'
 import { Main } from '../Main'
-import { LocationType } from './Page.interface'
+import { LocationType } from './Page.types'
 import s from './Page.module.scss'
 
 const SIGN_IN_LOCATION_PATHNAME = '/sign-in'

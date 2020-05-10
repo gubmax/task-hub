@@ -1,6 +1,6 @@
 import React, { FC, memo, useMemo } from 'react'
 
-import { LoaderProps } from './Loader.interface'
+import { LoaderProps } from './Loader.types'
 import s from './Loader.module.scss'
 
 const Loader: FC<LoaderProps> = memo(({ small, white, className }) => {

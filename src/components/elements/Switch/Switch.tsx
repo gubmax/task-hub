@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
 
-import { SwitchProps } from './Switch.interface'
+import { SwitchProps } from './Switch.types'
 import s from './Switch.module.scss'
 
 const Switch: FC<SwitchProps> = memo(({

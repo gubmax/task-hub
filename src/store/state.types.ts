@@ -1,4 +1,4 @@
-import { IStore } from './store.interface'
+import { IStore } from './store.types'
 
 export type TTheme = 'dark' | 'light'
 

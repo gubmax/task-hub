@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 import { useStore } from 'src/hooks'
 import { routes } from './routes'
-import { SidebarProps } from './Sidebar.interface'
+import { SidebarProps } from './Sidebar.types'
 import s from './Sidebar.module.scss'
 
 const Sidebar: FC<SidebarProps> = memo(({ pathname, fullscreen = false, goBack }) => {

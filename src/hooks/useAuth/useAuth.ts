@@ -2,7 +2,7 @@ import { useMemo, useCallback } from 'react'
 import { useHistory } from "react-router-dom"
 
 import { useStore, useRequest, } from 'src/hooks'
-import { UseAuth } from './useAuth.interface'
+import { UseAuth } from './useAuth.types'
 
 const ACCESS_TOKEN = 'access-token'
 const SIGN_IN_LOCATION_PATHNAME = '/sign-in'

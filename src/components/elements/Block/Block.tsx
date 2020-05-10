@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react'
 
-import { BlockProps } from './Block.interface'
+import { BlockProps } from './Block.types'
 import s from './Block.module.scss'
 
 const Block: FC<BlockProps> = memo(({ className, children }) => (

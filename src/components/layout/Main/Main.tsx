@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import { routes } from './routes'
-import { MainProps } from './Main.interface'
+import { MainProps } from './Main.types'
 import s from './Main.module.scss'
 
 const Main: FC<MainProps> = memo(({ location }) => {

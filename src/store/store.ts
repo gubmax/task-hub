@@ -5,7 +5,7 @@ import {
   ICreateStore, TListener, IStore, TMapState,
   TMapAssociateActions, TAssociateActions, TActions, TState,
   TSetState, IUseStore,
-} from './store.interface'
+} from './store.types'
 
 const setState: TSetState = (store, newState, afterUpdateCallback) => {
   store.state = { ...store.state, ...newState }

@@ -1,7 +1,7 @@
 import React, { FC, memo, useMemo } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
-import {SwitchTransitionProps} from './SwitchTransition.interface'
+import {SwitchTransitionProps} from './SwitchTransition.types'
 import s from './SwitchTransition.module.scss'
 
 const SwitchTransition: FC<SwitchTransitionProps> = memo(({

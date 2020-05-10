@@ -4,7 +4,7 @@ import {
 } from 'react'
 
 import { mockFetch } from 'src/helpers'
-import { useRequestType, ReducerStateType, ReducerActionType } from './useRequest.interface'
+import { useRequestType, ReducerStateType, ReducerActionType } from './useRequest.types'
 
 const initialState: ReducerStateType = {
   responseData: null,

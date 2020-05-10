@@ -1,4 +1,4 @@
-import { StoreActions } from './actions.interface'
+import { StoreActions } from './actions.types'
 
 const actions: StoreActions = {
   setThemeMode: ({ state, setState }, payload) => {

@@ -1,5 +1,5 @@
 import { getBooleanItemFromLocalStorage } from 'src/helpers'
-import { TTheme, TState } from './state.interface'
+import { TTheme, TState } from './state.types'
 
 const showSidebar = getBooleanItemFromLocalStorage('showSidebar')
 const bySystem = getBooleanItemFromLocalStorage('themeBySystem')

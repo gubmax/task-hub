@@ -1,4 +1,4 @@
-import { ReducerStateType } from 'src/hooks/useRequest/useRequest.interface'
+import { ReducerStateType } from 'src/hooks/useRequest/useRequest.types'
 
 export type UseAuth = () => [
   ReducerStateType & { accessToken: string | null },

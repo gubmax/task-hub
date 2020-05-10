@@ -1,7 +1,7 @@
 import React, { FC, memo, useMemo, useCallback } from 'react'
 
 import { Loader } from 'src/components/elements'
-import { ButtonProps } from './Button.interface'
+import { ButtonProps } from './Button.types'
 import s from './Button.module.scss'
 
 const Button: FC<ButtonProps> = memo(({

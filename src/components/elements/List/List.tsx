@@ -4,7 +4,7 @@ import React, {
 } from 'react'
 
 import { Block } from '../Block'
-import { ListProps } from './List.interface'
+import { ListProps } from './List.types'
 import s from './List.module.scss'
 
 const List: FC<ListProps> = memo(({ className, text, children }) => {

@@ -1,5 +1,5 @@
-import { TTheme, TState } from './state.interface'
-import { Actions } from './store.interface'
+import { TTheme, TState } from './state.types'
+import { Actions } from './store.types'
 
 export type ActionList = {
   setThemeMode: (payload: TTheme) => void,

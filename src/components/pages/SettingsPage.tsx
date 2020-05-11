@@ -1,16 +1,18 @@
 import React, { FC, useMemo } from 'react'
 
 import { useTheme } from 'src/hooks'
-import { Switch, List } from 'src/components/elements'
+import { Switch, List, Block } from 'src/components/elements'
 
 const SettingsPage: FC = () => {
   const [{ bySystem, mode }, { toggleThemeBySystem, toggleCurrTheme }] = useTheme()
 
   return useMemo(() => (
-    <List text="Night mode">
-      <Switch id="themeBySystem" checked={bySystem} onChange={toggleThemeBySystem}>Auto</Switch>
-      <Switch id="theme" checked={mode === 'dark'} onChange={toggleCurrTheme}>Turn on now</Switch>
-    </List>
+    <Block title="Night mode" text="You can decide how TaskHub look for you">
+      <List>
+        <Switch id="themeBySystem" checked={bySystem} onChange={toggleThemeBySystem}>Auto</Switch>
+        <Switch id="theme" checked={mode === 'dark'} onChange={toggleCurrTheme}>Turn on now</Switch>
+      </List>
+    </Block>
   ), [bySystem, mode, toggleThemeBySystem, toggleCurrTheme])
 }
 

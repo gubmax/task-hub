@@ -1,4 +1,6 @@
+import { ReactElement } from 'react'
+
 export interface ListProps {
   className?: string,
-  text: string,
+  children: ReactElement[],
 }

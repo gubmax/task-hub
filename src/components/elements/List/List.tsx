@@ -1,37 +1,38 @@
 import React, {
-  FC, memo, ReactElement, Children,
-  cloneElement,
+  FC, memo, useCallback, cloneElement,
+  Children, ReactElement,
 } from 'react'
 
-import { Block } from '../Block'
 import { ListProps } from './List.types'
 import s from './List.module.scss'
 
-const List: FC<ListProps> = memo(({ className, text, children }) => {
-  const addClassToChild = (child: ReactElement) => {
-    const { className: childClassName } = child.props
+const List: FC<ListProps> = memo(({ className, children }) => {
+  const addClassToChild = useCallback(
+    (child: ReactElement) => {
+      const { className: childClassName } = child.props || {}
 
-    const props = {
-      className: childClassName !== undefined ? `${s.listItem} ${childClassName}` : s.listItem,
-    }
+      const props = {
+        className: childClassName !== undefined
+          ? `${s.listItem} ${childClassName}`
+          : s.listItem,
+      }
 
-    return (
-      <div className={s.listItemWrapper}>
-        {cloneElement(child, props)}
-      </div>
-    )
-  }
+      return (
+        <div className={s.listItemWrapper}>
+          {cloneElement(child, props)}
+        </div>
+      )
+    },
+    [],
+  )
 
   return (
     <>
-      {
-        text && <span className={s.text}>{text}</span>
-      }
-      <Block className={`${s.list} ${className || ''}`}>
+      <div className={className || ''}>
         {
-          Children.map(children, (child) => addClassToChild(child as ReactElement))
+          Children.map(children, (child: ReactElement) => addClassToChild(child))
         }
-      </Block>
+      </div>
     </>
   )
 })

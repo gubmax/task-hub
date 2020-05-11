@@ -4,19 +4,18 @@ import React, {
 } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
+import { ENDPOINT_SEARCH } from 'src/helpers'
 import { useStore, useRequest, useDebouncedCallback, useClickOutside } from 'src/hooks'
 import { ReactComponent as SearchIcon } from 'src/static/images/icons/search-24px.svg'
 import { ReactComponent as ClearIcon } from 'src/static/images/icons/clear-24px.svg'
 import { SearchFieldProps } from './SearchField.types'
 import s from './SearchField.module.scss'
 
-const SEARCH_URL = '/search'
-
 const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false }) => {
   const history = useHistory()
   const { pathname } = useLocation()
   const [, { setSearching }] = useStore()
-  const [, searchFetch] = useRequest({ url: SEARCH_URL, preload: true })
+  const [, searchFetch] = useRequest({ url: ENDPOINT_SEARCH, preload: true })
 
   // Debouncing search
   const [debounceSearch, searchImmediately] = useDebouncedCallback(() => {
@@ -24,8 +23,8 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
       return
     }
 
-    if (pathname !== SEARCH_URL) {
-      history.push(SEARCH_URL)
+    if (pathname !== ENDPOINT_SEARCH) {
+      history.push(ENDPOINT_SEARCH)
     }
 
     setSearching(true)
@@ -36,7 +35,7 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const isSearchPage = pathname === SEARCH_URL
+  const isSearchPage = pathname === ENDPOINT_SEARCH
 
   const elRef = useClickOutside<HTMLDivElement>(
     () => collapse && setCollapseField(true),

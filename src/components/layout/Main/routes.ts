@@ -2,6 +2,10 @@ import { ComponentType } from 'react'
 import { RouteProps } from 'react-router'
 
 import {
+  LOCATION_ROOT, LOCATION_CALENDAR, LOCATION_REVIEW, LOCATION_INFO,
+  LOCATION_SEARCH, LOCATION_SETTINGS,
+} from 'src/helpers'
+import {
   ProjectsPage, CalendarPage, ReviewPage, InfoPage, SearchPage, SettingsPage,
 } from 'src/components/pages'
 
@@ -11,32 +15,32 @@ interface Route extends RouteProps {
 
 const routes: Route[] = [
   {
-    path: '/',
+    path: LOCATION_ROOT,
     exact: true,
     component: ProjectsPage,
   },
   {
-    path: '/calendar',
+    path: LOCATION_CALENDAR,
     exact: true,
     component: CalendarPage,
   },
   {
-    path: '/review',
+    path: LOCATION_REVIEW,
     exact: true,
     component: ReviewPage,
   },
   {
-    path: '/info',
+    path: LOCATION_INFO,
     exact: true,
     component: InfoPage,
   },
   {
-    path: '/search',
+    path: LOCATION_SEARCH,
     exact: true,
     component: SearchPage,
   },
   {
-    path: '/settings',
+    path: LOCATION_SETTINGS,
     exact: true,
     component: SettingsPage,
   },

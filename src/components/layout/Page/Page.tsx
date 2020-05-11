@@ -4,6 +4,7 @@ import React, {
 } from 'react'
 import { useHistory, Switch, Route } from 'react-router-dom'
 
+import { LOCATION_SIGNIN, LOCATION_SIDEBAR } from 'src/helpers'
 import { useBodyWidth } from  'src/hooks'
 import { ModalWindow, SwitchTransition } from 'src/components/elements'
 import { SignInPage } from 'src/components/pages'
@@ -12,8 +13,6 @@ import { Sidebar } from '../Sidebar'
 import { Main } from '../Main'
 import { LocationType } from './Page.types'
 import s from './Page.module.scss'
-
-const SIGN_IN_LOCATION_PATHNAME = '/sign-in'
 
 const Page: FC = memo(() => {
   const { location, goBack } = useHistory<LocationType>()
@@ -24,7 +23,7 @@ const Page: FC = memo(() => {
   const isSidebarLocation = state && state.isSidebar
   const isModalLocation = state && state.isModal
   const currLocation = isModalLocation ? prevLocation : location
-  const isSwitchableLocation = currLocation.pathname === SIGN_IN_LOCATION_PATHNAME
+  const isSwitchableLocation = currLocation.pathname === LOCATION_SIGNIN
 
   // Save prev location when sidebar is open
   useEffect(() => {
@@ -54,7 +53,7 @@ const Page: FC = memo(() => {
 
     if (collapseSidebar) {
       return (
-        <ModalWindow path="/sidebar" transitionClassNames={sidebarClassNames}>
+        <ModalWindow path={LOCATION_SIDEBAR} transitionClassNames={sidebarClassNames}>
           <Sidebar pathname={pathname} goBack={goBack} fullscreen />
         </ModalWindow>
       )
@@ -66,7 +65,7 @@ const Page: FC = memo(() => {
   return (
     <SwitchTransition transitionKey={Number(isSwitchableLocation)}>
       <Switch location={location}>
-        <Route path={SIGN_IN_LOCATION_PATHNAME}>
+        <Route path={LOCATION_SIGNIN}>
           <SignInPage />
         </Route>
         <Route path="*">

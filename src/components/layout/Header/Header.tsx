@@ -1,7 +1,7 @@
 import React, { FC, memo, useMemo, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
-import { setBooleanItemToLocalStorage } from 'src/helpers'
+import { setBooleanItemToLocalStorage, LOCATION_SIDEBAR } from 'src/helpers'
 import { useStore, useAuth, useBodyWidth } from 'src/hooks'
 import { SearchField } from 'src/components/elements'
 import { ReactComponent as MenuIcon } from 'src/static/images/icons/menu-24px.svg'
@@ -42,7 +42,7 @@ const Header: FC<HeaderProps> = memo(({ iconWithLink }) => {
   const menuIconTemplate = useMemo(() => {
     if (iconWithLink) {
       const to = {
-        pathname: '/sidebar',
+        pathname: LOCATION_SIDEBAR,
         state: { 
           isSidebar: true,
           isModal: true,

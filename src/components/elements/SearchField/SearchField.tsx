@@ -4,7 +4,8 @@ import React, {
 } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-import { ENDPOINT_SEARCH } from 'src/helpers'
+
+import { ENDPOINT_SEARCH, cn } from 'src/helpers'
 import { useStore, useRequest, useDebouncedCallback, useClickOutside } from 'src/hooks'
 import { ReactComponent as SearchIcon } from 'src/static/images/icons/search-24px.svg'
 import { ReactComponent as ClearIcon } from 'src/static/images/icons/clear-24px.svg'
@@ -91,11 +92,11 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
     [value, history]
   )
 
-  const classNames = [
+  const classNames = cn(
     s.wrapper,
     collapse && collapseField ? s.isCollapse : '',
     className,
-  ].join(' ')
+  )
 
   return (
     <div className={classNames} ref={elRef}>

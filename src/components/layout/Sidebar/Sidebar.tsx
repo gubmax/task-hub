@@ -4,6 +4,7 @@ import React, {
 } from 'react'
 import { Link } from 'react-router-dom'
 
+import { cn } from 'src/helpers'
 import { useStore } from 'src/hooks'
 import { routes } from './routes'
 import { SidebarProps } from './Sidebar.types'
@@ -32,13 +33,11 @@ const Sidebar: FC<SidebarProps> = memo(({ pathname, fullscreen = false, goBack }
     })
   ), [getLinkClassName])
 
-  const classNames = useMemo(() => (
-    [
-      s.wrapper,
-      fullscreen || showSidebar ? s.isShow : '',
-      fullscreen ? s.isFullscreen : '',
-    ].join(' ')
-  ), [fullscreen, showSidebar])
+  const classNames = cn(
+    s.wrapper,
+    fullscreen || showSidebar ? s.isShow : '',
+    fullscreen ? s.isFullscreen : '',
+  )
 
   return (
     <div className={classNames} onClick={goBack}>

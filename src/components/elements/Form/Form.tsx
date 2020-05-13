@@ -12,7 +12,7 @@ const Form: FC<FormProps> = memo(({ className, children, onSubmit }) => {
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
   
-      if (fetch) {
+      if (fetch || onSubmit === undefined) {
         return
       }
   

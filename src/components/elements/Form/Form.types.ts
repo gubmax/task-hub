@@ -1,4 +1,4 @@
 export type FormProps = {
   className?: string,
-  onSubmit: () => Promise<unknown>,
+  onSubmit?: () => Promise<unknown>,
 }

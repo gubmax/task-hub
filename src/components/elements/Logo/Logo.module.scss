@@ -1,0 +1,33 @@
+.logo {
+  flex-shrink: 0;
+  color: var(--color-darker);
+  font-weight: 500;
+
+  &.small {
+    font-size: 1.65rem;
+
+    &  > .highlight {
+      border-width: 2px;
+    }
+  }
+
+  &.large {
+    font-size: 2.5rem;
+
+    &  > .highlight {
+      border-width: 3px;
+    }
+  }
+}
+
+.highlight {
+  display: inline-block;
+  width: 1.2em;
+  border-style: solid;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  transform: rotate(8deg);
+}

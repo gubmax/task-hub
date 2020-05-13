@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import { useAuth } from 'src/hooks'
-import { Block, Form, Field, Button } from 'src/components/elements'
+import { Block, Form, Field, Button, Logo } from 'src/components/elements'
 import s from './SignInForm.module.scss'
 
 const SignInForm: FC = () => {
@@ -10,7 +10,7 @@ const SignInForm: FC = () => {
   return (
     <Block className={s.wrapper}>
       <Form className={s.form} onSubmit={signIn}>
-        <span className={s.logo}>H</span>
+        <Logo className={s.logo} size="large" />
         <Field id="login" label="E-mail" />
         <Field id="password" label="Password" />
         <Button

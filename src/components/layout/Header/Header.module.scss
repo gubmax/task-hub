@@ -53,23 +53,8 @@
   width: 28px;
 }
 
-.title {
-  flex-shrink: 0;
-  color: var(--color-darker);
-  font-size: 1.65rem;
-  font-weight: 500;
+.logo {
   margin: 0 32px 0 16px;
-}
-
-.titleHighlight {
-  display: inline-block;
-  width: 26px;
-  line-height: 26px;
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  font-weight: bold;
-  text-align: center;
-  border-radius: 50%;
 }
 
 .search {

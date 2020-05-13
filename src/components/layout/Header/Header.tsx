@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { setBooleanItemToLocalStorage, LOCATION_SIDEBAR } from 'src/helpers'
 import { useStore, useAuth, useBodyWidth } from 'src/hooks'
-import { SearchField } from 'src/components/elements'
+import { Logo, SearchField } from 'src/components/elements'
 import { ReactComponent as MenuIcon } from 'src/static/images/icons/menu-24px.svg'
 import { ReactComponent as SignOutIcon } from 'src/static/images/icons/sign-out-24px.svg'
 import { HeaderProps } from './Header.types'
@@ -57,11 +57,7 @@ const Header: FC<HeaderProps> = memo(({ iconWithLink }) => {
   return (
     <header className={s.header}>
       {menuIconTemplate}
-      <span className={s.title}>
-        <span>Task</span>
-        <span className={s.titleHighlight}>H</span>
-        <span>ub</span>
-      </span>
+      <Logo className={s.logo} />
       <div className={s.iconsBox}>
         <SearchField className={s.search} collapse={collapseSearch} />
         <SignOutIcon className={s.icon} onClick={signOut} />

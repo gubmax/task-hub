@@ -1,20 +1,28 @@
 .wrapper {
   position: relative;
   width: 100%;
-  padding-top: 24px;
-  margin-bottom: 20px;
+  padding: 24px 0;
+  margin-bottom: 12px;
   font-weight: 500;
 }
 
-.label {
+.label,
+.error {
   position: absolute;
-  top: 0;
   display: block;
-  margin-bottom: 4px;
   margin-left: 16px;
+}
+
+.label {
+  top: 0;
   color: var(--color-darker);
   font-size: 1.15rem;
   transition: color 0.2s;
+}
+
+.error {
+  bottom: 0;
+  color: var(--color-error);
 }
 
 .input {
@@ -36,6 +44,11 @@
     0.15s opacity;
   border: 1px solid var(--color-light);
 
+  &.hasError {
+    // background-color: var(--color-error-light);
+    border-color: var(--color-error);
+  }
+
   &::placeholder {
     color: var(--color-darker);
     font-size: inherit;
@@ -49,9 +62,10 @@
 
   &:hover,
   &:focus {
+    color: var(--color-primary);
+
     & + .label {
       color: var(--color-primary);
     }
-    color: var(--color-primary);
   }
 }

@@ -73,12 +73,15 @@ input:-webkit-autofill {
   --color-primary: rgb(64, 64, 64);
   --color-accent: rgb(63, 81, 181);
   --color-border: rgb(190, 190, 190);
+  --color-error: rgb(198, 40, 40);
+
+  --color-accent-light: rgba(var(--rgb-accent), .2);
+
   --rgb-accent: 63, 81, 181;
   --rgb-light: 242, 242, 242;
   --rgb-shadow: 18, 24, 28;
-  --rgba-shadow: rgba(var(--rgb-shadow), .12);
 
-  --color-accent-light: rgba(var(--rgb-accent), .2);
+  --rgba-shadow: rgba(var(--rgb-shadow), .12);
 }
 
 [data-theme='dark'] {
@@ -90,8 +93,11 @@ input:-webkit-autofill {
   --color-primary: rgb(224, 224, 224);
   --color-accent: rgb(92, 107, 192);
   --color-border: rgb(12, 12, 12);
+  --color-error: rgb(255, 95, 82);
+
   --rgb-accent: 92, 107, 192;
   --rgb-light: 26, 26, 26;
   --rgb-shadow: 18, 24, 28;
+
   --rgba-shadow: rgba(var(--rgb-shadow), .4);
 }

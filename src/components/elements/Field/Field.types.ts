@@ -3,5 +3,7 @@ export type FieldProps = {
   label?: string,
   value?: string | number | string[],
   placeholder?: string,
-  onChange?: (value: string) => void,
+  error?: string,
+  password?: boolean,
+  onChange?: (id: string, value: string) => void,
 }

@@ -1,9 +1,10 @@
 import React, { FC, useMemo } from 'react'
 
-import { useTheme } from 'src/hooks'
+import { useDocumentTitle, useTheme } from 'src/hooks'
 import { Switch, List, Block } from 'src/components/elements'
 
 const SettingsPage: FC = () => {
+  useDocumentTitle('Settings')
   const [{ bySystem, mode }, { toggleThemeBySystem, toggleCurrTheme }] = useTheme()
 
   return useMemo(() => (

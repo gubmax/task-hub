@@ -1,0 +1,100 @@
+.wrapper {
+  width: 100%;
+}
+
+.card {
+  margin-bottom: 12px;
+  padding: 0 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 20px;
+  cursor: pointer;
+
+  &.light {
+    background: rgb(245, 245, 245);
+    border-color: rgb(245, 245, 245);
+    
+    .circle {
+      background: rgb(118, 118, 118);
+    }
+
+    .line,
+    .narrowLine {
+      background: rgb(255, 255, 255);
+      border-color: rgb(230, 230, 230);
+    }
+  }
+
+  &.dark {
+    background: rgb(26, 26, 26);
+    border-color: rgb(26, 26, 26);
+
+    .circle {
+      background: rgb(176, 176, 177);
+    }
+
+    .line,
+    .narrowLine {
+      background: rgb(33, 33, 33);
+      border-color: rgb(17, 17, 17);
+    }
+  }
+
+  &.isActive {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px var(--color-accent-light);
+  }
+}
+
+.columns {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.leftColumn {
+  margin-right: 12px;
+}
+
+.rightColumn {
+  width: 100%;
+}
+
+.circle, 
+.line {
+  margin: 12px 0;
+}
+
+.circle {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
+.line,
+.narrowLine {
+  border-radius: 20px;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.line {
+  height: 44px;
+}
+
+.narrowLine {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+  height: 20px;
+}
+
+.text {
+  display: block;
+  text-align: center;
+  text-transform: capitalize;
+
+  &.isActive {
+    font-weight: bold;
+    color: var(--color-accent);
+  }
+}

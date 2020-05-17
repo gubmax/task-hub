@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.leftCard {
+  margin-right: 10px;
+}
+
+.rightCard {
+  margin-left: 10px;
+}

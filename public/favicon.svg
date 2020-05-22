@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <style>
+    rect { stroke: #3f51b5 }
+    path { fill: #3f51b5 }
+    @media (prefers-color-scheme: dark) {
+      rect { stroke: #5c6bc0 }
+      path { fill: #5c6bc0 }
+    }
+  </style>
+  <rect
+    width="20" height="20" x="2" y="2"
+    fill="none" stroke-width="2" rx="4" ry="4"
+    transform="rotate(8 12 12)"
+  />
+  <path d="M8.02 4.37L10 4.65L8.05 18.51L6.07 18.23L8.02 4.37Z" />
+  <path d="M15.94 5.48L17.92 5.76L15.98 19.63L13.99 19.35L15.94 5.48Z" />
+  <path d="M8.16 10.58L16.08 11.69L15.84 13.43L7.91 12.31L8.16 10.58Z" />
+</svg>
+

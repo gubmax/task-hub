@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   background: rgba(var(--rgb-light), .9);
+  z-index: 2;
 }
 
 .fadeEnter {
@@ -15,7 +16,7 @@
 
   &.fadeEnterActive {
     opacity: 1;
-    transition: opacity 0.25s;
+    transition: opacity 2s;
   }
 }
 
@@ -24,6 +25,6 @@
 
   &.fadeExitActive {
     opacity: 0;
-    transition: opacity 0.2s;
+    transition: opacity 0.15s;
   }
 }

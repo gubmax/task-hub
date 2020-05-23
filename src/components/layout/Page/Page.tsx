@@ -1,5 +1,5 @@
 import React, {
-  FC, memo, useState, useEffect,
+  FC, memo, useRef, useEffect,
   useMemo,
 } from 'react'
 import { useHistory, Switch, Route } from 'react-router-dom'
@@ -17,18 +17,18 @@ import s from './Page.module.scss'
 const Page: FC = memo(() => {
   const { location, goBack } = useHistory<LocationType>()
 
-  const [prevLocation, setPrevLocation] = useState(location)
+  const prevLocation = useRef(location)
 
   const { state } = location
   const isSidebarLocation = state && state.isSidebar
   const isModalLocation = state && state.isModal
-  const currLocation = isModalLocation ? prevLocation : location
+  const currLocation = isModalLocation ? prevLocation.current : location
   const isSwitchableLocation = currLocation.pathname === LOCATION_SIGNIN
 
   // Save prev location when sidebar is open
   useEffect(() => {
     if (isModalLocation !== true) {
-      setPrevLocation(location)
+      prevLocation.current = location
     }
   }, [isModalLocation, location])
 
@@ -71,8 +71,10 @@ const Page: FC = memo(() => {
         <Route path="*">
           <div className={s.base}>
             <Header iconWithLink={collapseSidebar} />
-            <Main location={currLocation} />
-            {sidebarTemplate}
+            <div className={s.main}>
+              {sidebarTemplate}
+              <Main location={currLocation} />
+            </div>
           </div>
         </Route>
       </Switch>

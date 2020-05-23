@@ -1,5 +1,7 @@
 .header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
   height: 56px;
   align-items: center;
   background: var(--color-lighter);
@@ -13,6 +15,7 @@
   justify-content: flex-start;
   grid-area: header;
   padding: 0 20px;
+  z-index: 1;
 }
 
 .icon,

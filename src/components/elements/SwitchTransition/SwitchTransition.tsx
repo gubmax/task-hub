@@ -28,7 +28,7 @@ const SwitchTransition: FC<SwitchTransitionProps> = memo(({
       <CSSTransition
         key={transitionKey}
         classNames={switchTransitionClassNames}
-        timeout={200}
+        timeout={{ enter: 200, exit: 150 }}
       >
         {children}
       </CSSTransition>

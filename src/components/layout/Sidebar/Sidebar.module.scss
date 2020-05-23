@@ -1,18 +1,18 @@
 .wrapper {
-  position: relative;
-  grid-area: nav;
-  grid-column: 1;
-  height: 100vh;
-  width: 100%;
+  height: inherit;
+  width: 80px;
+  flex-shrink: 0;
+  transition: width .2s ease;
 
-  &.isShow > .nav {
+  &.isShow {
     width: 240px;
   }
 
   &.isFullscreen {
     position: absolute;
     top: 0;
-    z-index: 1;
+    left: 0;
+    width: 100%;
 
     & > .nav {
       background: var(--color-lighter);
@@ -30,11 +30,11 @@
 }
 
 .nav {
+  position: fixed;
   display: block;
-  height: 100vh;
+  width: inherit;
+  height: inherit;
   overflow: hidden;
-  transition: width .25s ease;
-  width: 80px;
 }
 
 .list {

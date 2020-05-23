@@ -1,5 +1,5 @@
 import { Location } from 'history'
 
-export interface MainProps {
+export type MainProps = {
   location: Location,
 }

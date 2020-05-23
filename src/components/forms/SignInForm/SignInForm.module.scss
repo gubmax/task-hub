@@ -1,13 +1,14 @@
 .wrapper {
-  position: absolute;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.block {
   box-sizing: border-box;
-  top: 50%;
-  left: 50%;
   width: 100%;
   min-width: 360px;
   max-width: 420px;
-  margin: 0 auto;
-  transform: translate(-50%, -50%);
 }
 
 .form {

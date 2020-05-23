@@ -3,31 +3,8 @@
   box-sizing: border-box;
   display: block;
   grid-area: main;
-  padding: 40px;
+  padding: 25px 40px 40px;
   overflow-y: hidden;
-}
-
-.wrapper {
-  margin: 0 auto;
-  position: relative;
-}
-
-/* Route Transition */
-.routeEnter {
-  opacity: .01;
-  transform: scale(.95);
-
-  &.routeEnterActive {
-    opacity: 1;
-    transform: scale(1);
-    transform-origin: top;
-    transition: transform .25s ease, opacity .25s ease;
-  }
-}
-
-.routeExit {
-  position: absolute;
-  visibility: hidden;
 }
 
 @media (max-width: 776px) {

@@ -1,9 +1,13 @@
+.wrapper {
+  position: relative;
+}
+
 .fadeEnter {
   opacity: 0;
 
   &.fadeEnterActive {
     opacity: 1;
-    transition: opacity 0.25s;
+    transition: opacity 0.2s;
   }
 }
 
@@ -11,7 +15,12 @@
   opacity: 1;
 
   &.fadeExitActive {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 50%;
     opacity: 0;
-    transition: opacity 0.2s;
+    transform: translateX(-50%);
+    transition: opacity 0.15s;
   }
 }

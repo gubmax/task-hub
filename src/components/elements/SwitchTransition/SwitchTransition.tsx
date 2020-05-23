@@ -1,31 +1,34 @@
 import React, { FC, memo, useMemo } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
+import { cn } from 'src/helpers'
 import {SwitchTransitionProps} from './SwitchTransition.types'
 import s from './SwitchTransition.module.scss'
 
 const SwitchTransition: FC<SwitchTransitionProps> = memo(({
-  children,
-  transitionKey,
-  transitionClassNames,
+  component = null,
+  className, children, transitionKey, transitionClassNames,
 }) => {
-  const switchTransitionClassNames = useMemo(() => {
-    const { enter, enterActive, exit, exitActive } = transitionClassNames || {}
-    return {
-      ...transitionClassNames,
-      enter: `${s.fadeEnter}${enter ? ` ${enter}` : ''}`,
-      enterActive: `${s.fadeEnterActive}${enterActive ? ` ${enterActive}` : ''}`,
-      exit: `${s.fadeExit}${exit ? ` ${exit}` :  ''}`,
-      exitActive: `${s.fadeExitActive}${exitActive ? ` ${exitActive}` : ''}`,
-    }
-  }, [transitionClassNames])
+  const switchTransitionClassNames = useMemo(
+    () => {
+      const { enter, enterActive, exit, exitActive } = transitionClassNames || {}
+      return {
+        enter: cn(s.fadeEnter, enter),
+        enterActive: cn(s.fadeEnterActive, enterActive),
+        exit: cn(s.fadeExit, exit),
+        exitActive: cn(s.fadeExitActive, exitActive),
+        ...transitionClassNames,
+      }
+    },
+    [transitionClassNames]
+  )
 
   return (
-    <TransitionGroup component={null}>
+    <TransitionGroup component={component} className={cn(s.wrapper, className)}>
       <CSSTransition
         key={transitionKey}
         classNames={switchTransitionClassNames}
-        timeout={250}
+        timeout={200}
       >
         {children}
       </CSSTransition>

@@ -1,4 +1,5 @@
 export { App } from './App'
+export { Breadcrumbs } from './Breadcrumbs'
 export { Header } from './Header'
 export { Main } from './Main'
 export { Modal } from './Modal'

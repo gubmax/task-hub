@@ -1,6 +1,7 @@
 import React, { FC, memo, useMemo } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
+import { Breadcrumbs } from 'src/components/layout'
 import { SwitchTransition } from 'src/components/elements'
 import { routes } from './routes'
 import { MainProps } from './Main.types'
@@ -24,6 +25,7 @@ const Main: FC<MainProps> = memo(({ location }) => {
 
   return (
     <main className={s.main}>
+      <Breadcrumbs location={location} />
       <SwitchTransition component="div" transitionKey={location.key}>
         <Switch location={location}>
           {routesTemplate}

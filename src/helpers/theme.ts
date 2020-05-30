@@ -1,13 +1,21 @@
+import { COLOR_LIGHT_PRIMARY, COLOR_DARK_PRIMARY } from 'src/helpers'
+
+export type Theme = 'dark' | 'light'
+
 export const getDarkModeMediaQuery = () => window.matchMedia('(prefers-color-scheme: dark)')
 
 export const darkModeMatches = () => getDarkModeMediaQuery().matches
 
-export const getCurrThemeMode = (isDarkMode: boolean) => (isDarkMode ? 'dark' : 'light')
+export const getThemeMode = (isDarkMode: boolean): Theme => (isDarkMode ? 'dark' : 'light')
 
-export const setDataThemeAttribute = (theme: string) => {
-  document.documentElement.setAttribute('data-theme', theme)
+export const getCurrThemeMode = () => getThemeMode(darkModeMatches())
 
-  // Chrome, Firefox OS and Opera
+export const setMetaThemeColor = (color: string) => {
   const metaThemeColor = document.querySelector('meta[name=theme-color]')
-  metaThemeColor!.setAttribute('content', theme === 'dark' ? '#212121' : '#fff')
+  metaThemeColor!.setAttribute('content', color)
+}
+
+export const setTheme = (theme: Theme) => {
+  document.documentElement.setAttribute('data-theme', theme)
+  setMetaThemeColor(theme === 'dark' ? COLOR_DARK_PRIMARY : COLOR_LIGHT_PRIMARY)
 }

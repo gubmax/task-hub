@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 
 import {
-  setBooleanItemToLocalStorage, getDarkModeMediaQuery, darkModeMatches, getCurrThemeMode,
-  setDataThemeAttribute,
+  setBooleanItemToLocalStorage, getDarkModeMediaQuery, getThemeMode,
+  getCurrThemeMode, setTheme,
 } from 'src/helpers'
 import { useStore } from 'src/hooks'
 
@@ -18,19 +18,19 @@ const useTheme = (): [
   const { bySystem, mode } = themeState
 
   const initThemeChanger = useCallback(() => {
-    const currTheme = bySystem ? getCurrThemeMode(darkModeMatches()) : mode
-    setDataThemeAttribute(currTheme)
+    const currTheme = bySystem ? getCurrThemeMode() : mode
+    setTheme(currTheme)
 
     const darkModeMediaQuery = getDarkModeMediaQuery()
     darkModeMediaQuery.addListener((e) => {
       const isDarkMode = e.matches
-      const currTheme = getCurrThemeMode(isDarkMode)
-      setDataThemeAttribute(currTheme)
+      const currTheme = getThemeMode(isDarkMode)
+      setTheme(currTheme)
     })
   }, [bySystem, mode])
 
   const toggleThemeBySystem = useCallback((value: boolean) => {
-    const currTheme = getCurrThemeMode(darkModeMatches())
+    const currTheme = getCurrThemeMode()
 
     setThemeMode(currTheme)
     setThemeBySystem(value)
@@ -40,11 +40,11 @@ const useTheme = (): [
   }, [setThemeBySystem, setThemeMode])
 
   const setDarkMode = useCallback((value: boolean) => {
-    const currThemeMode = getCurrThemeMode(value)
+    const currThemeMode = getThemeMode(value)
 
     setThemeBySystem(false)
     setThemeMode(currThemeMode)
-    setDataThemeAttribute(currThemeMode)
+    setTheme(currThemeMode)
 
     localStorage.setItem('theme', currThemeMode)
     setBooleanItemToLocalStorage('themeBySystem', false)

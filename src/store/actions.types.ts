@@ -1,4 +1,5 @@
-import { Theme, MainState } from './state.types'
+import { Theme } from 'src/helpers/theme'
+import { MainState } from './state.types'
 import { Actions } from './store.types'
 
 export type ActionList = {

@@ -11,3 +11,7 @@ export const LOCATION_SETTINGS = '/settings'
 // Enpoints
 export const ENDPOINT_SEARCH = '/search'
 export const ENDPOINT_SIGNIN = '/sign-in'
+
+// Colors
+export const COLOR_LIGHT_PRIMARY = '#fff'
+export const COLOR_DARK_PRIMARY = '#212121'

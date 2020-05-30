@@ -1,6 +1,4 @@
-import { Store } from './store.types'
-
-export type Theme = 'dark' | 'light'
+import { Theme } from 'src/helpers/theme'
 
 export type MainState = {
   theme: {

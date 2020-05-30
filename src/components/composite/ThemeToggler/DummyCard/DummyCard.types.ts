@@ -1,4 +1,4 @@
-import { Theme } from 'src/store/state.types'
+import { Theme } from 'src/helpers/theme'
 
 export type DummyCardProps = {
   className?: string,

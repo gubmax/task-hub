@@ -8,10 +8,11 @@ const App: FC = () => {
   const [, { initThemeChanger }] = useTheme()
 
   // Set theme
-  useEffect(() => {
-    initThemeChanger()
-  }, [initThemeChanger])
-  
+  useEffect(
+    () => { initThemeChanger() },
+    [initThemeChanger]
+  )
+
   return useMemo(() => (
     <Router>
       <Page />

@@ -5,7 +5,7 @@ import React, {
 import { useHistory, Switch, Route } from 'react-router-dom'
 
 import { LOCATION_SIGNIN, LOCATION_SIDEBAR } from 'src/helpers'
-import { useBodyWidth } from  'src/hooks'
+import { useWindowSize } from 'src/hooks'
 import { ModalWindow, SwitchTransition } from 'src/components/elements'
 import { SignInPage } from 'src/components/pages'
 import { Header } from '../Header'
@@ -32,8 +32,8 @@ const Page: FC = memo(() => {
     }
   }, [isModalLocation, location])
 
-  // Toggle sidebar on resize document body
-  const [collapseSidebar] = useBodyWidth((width) => width <= 776)
+  // Toggle sidebar on resize viewport
+  const [collapseSidebar] = useWindowSize('(max-width: 776px)')
 
   useEffect(() => {
     if (!collapseSidebar && isSidebarLocation) {

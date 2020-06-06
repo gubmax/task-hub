@@ -5,10 +5,14 @@ import {
 
 import {useDebouncedCallback} from 'src/hooks'
 
-const useBodyWidth = (
-  condition: (width: number) => boolean,
+const useWindowSize = (
+  mediaQueryString: string,
 ): [boolean, Dispatch<SetStateAction<boolean>>] => {
-  const checkCondition = useCallback(() => condition(document.body.offsetWidth), [condition])
+  const checkCondition = useCallback(
+    () => window.matchMedia(mediaQueryString).matches, 
+    [mediaQueryString]
+  )
+
   const [resizeWindow] = useDebouncedCallback(
     () => {
       const check = checkCondition()
@@ -32,4 +36,4 @@ const useBodyWidth = (
   return [value, setValue]
 }
 
-export { useBodyWidth }
+export { useWindowSize }

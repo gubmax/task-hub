@@ -74,6 +74,7 @@ input:-webkit-autofill {
   --color-accent: rgb(63, 81, 181);
   --color-border: rgb(190, 190, 190);
   --color-error: rgb(198, 40, 40);
+  --color-error-light: rgb(246, 213, 213);
 
   --color-accent-light: rgba(var(--rgb-accent), .2);
 
@@ -94,6 +95,7 @@ input:-webkit-autofill {
   --color-accent: rgb(92, 107, 192);
   --color-border: rgb(12, 12, 12);
   --color-error: rgb(255, 95, 82);
+  --color-error-light: hsl(2, 22%, 24%);
 
   --rgb-accent: 92, 107, 192;
   --rgb-light: 26, 26, 26;

@@ -2,7 +2,8 @@ import React, { FC, useCallback } from 'react'
 
 import { useAuth, useForm } from 'src/hooks'
 import { FormFields } from 'src/hooks/useForm/useForm.types'
-import { Block, Form, Field, Button, Logo} from 'src/components/elements'
+import { Block, Button, Logo} from 'src/components/elements'
+import { Form, FormField } from 'src/components/composite'
 import s from './SignInForm.module.scss'
 
 type Field = 'login' | 'password'
@@ -39,8 +40,8 @@ const SignInForm: FC = () => {
       <Block className={s.block}>
         <Form className={s.form} onSubmit={handleSubmit}>
           <Logo className={s.logo} size="large" />
-          <Field
-            id="login"
+          <FormField
+            name="login"
             label="E-mail"
             value={formState.login}
             error={formErrors.login}
@@ -48,8 +49,8 @@ const SignInForm: FC = () => {
             autoComplete
             autoFocus
           />
-          <Field
-            id="password"
+          <FormField
+            name="password"
             label="Password"
             value={formState.password}
             error={formErrors.password}

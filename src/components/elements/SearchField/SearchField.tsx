@@ -4,8 +4,8 @@ import React, {
 } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-
 import { ENDPOINT_SEARCH, cn } from 'src/helpers'
+import { Field } from 'src/components/elements'
 import { useStore, useRequest, useDebouncedCallback, useClickOutside } from 'src/hooks'
 import { ReactComponent as SearchIcon } from 'src/static/images/icons/search-24px.svg'
 import { ReactComponent as ClearIcon } from 'src/static/images/icons/clear-24px.svg'
@@ -32,7 +32,6 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
     searchFetch().finally(() => setSearching(false))
   }, 500)
 
-  const [isFocus, setIsFocus] = useState(false)
   const [collapseField, setCollapseField] = useState(collapse)
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -50,12 +49,11 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
 
   const elRef = useClickOutside<HTMLDivElement>(
     () => {
-      setIsFocus(false)
       if (collapse) {
         setCollapseField(true)
       }
     },
-    !collapseField || isFocus,
+    !collapseField
   )
 
   const onSearchHandler = useCallback(() => {
@@ -78,7 +76,6 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
 
   const onChangeHandler = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setIsFocus(true)
       setValue(event.target.value)
       debounceSearch()
     },
@@ -103,7 +100,6 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
       }
 
       setValue('')
-      inputRef.current!.focus()
     },
     [value, history]
   )
@@ -114,13 +110,11 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
     className,
   )
 
-  const handleClick = useCallback(() => setIsFocus(true), [])
-
   return (
-    <div className={classNames} ref={elRef} onClick={handleClick}>
-      <input
-        type="text"
-        className={cn(s.input, isFocus && s.isActive)}
+    <div className={classNames} ref={elRef}>
+      <Field
+        name="search"
+        className={s.input}
         value={value}
         ref={inputRef}
         placeholder="Search"

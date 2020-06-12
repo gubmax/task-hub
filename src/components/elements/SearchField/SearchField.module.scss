@@ -16,39 +16,7 @@
 }
 
 .input {
-  height: 46px;
-  background: var(--color-light);
-  border-radius: 20px;
-  border-width: 0;
-  box-sizing: border-box;
-  color: var(--color-darker);
-  font-family: inherit;
-  font-size: 1.15rem;
-  line-height: 1em;
-  padding: 12px 48px 12px 48px;
-  width: 100%;
-  transition:
-    0.15s color,
-    0.15s box-shadow,
-    0.15s visibility,
-    0.15s opacity;
-  border: 1px solid var(--color-light);
-
-  &::placeholder {
-    color: var(--color-darker);
-    font-size: inherit;
-  }
-
-  &:hover,
-  &:focus {
-    color: var(--color-primary);
-  }
-
-  &.isActive {
-    background: var(--color-lighter);
-    box-shadow: 0 0 0 4px var(--color-accent-light);
-    border-color: var(--color-accent);
-  }
+  padding: 12px 48px;
 }
 
 .icon {
@@ -79,15 +47,4 @@
 
 .clearIcon {
   right: 0;
-}
-
-@media (max-width: 776px) {
-
-  .wrapper {
-    max-width: none;
-  }
-
-  .input {
-    max-width: none;
-  }
 }

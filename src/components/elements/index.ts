@@ -1,7 +1,6 @@
 export { Block } from './Block'
 export { Button } from './Button'
 export { Field } from './Field'
-export { Form } from './Form'
 export { List } from './List'
 export { Loader } from './Loader'
 export { Logo } from './Logo'

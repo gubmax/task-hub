@@ -1,12 +1,14 @@
+import { ChangeEvent, KeyboardEvent } from 'react'
+
 export type FieldProps = {
-  id: string,
+  name: string,
   className?: string,
-  label?: string,
   value?: string | number | string[],
   placeholder?: string,
   error?: string,
   password?: boolean,
   autoComplete?: boolean,
   autoFocus?: boolean,
-  onChange?: (id: string, value: string) => void,
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
+  onKeyPress?: (event: KeyboardEvent<HTMLInputElement>) => void,
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import { isEmptyField, validationRules } from './validation'
 import { ValidationRule, Validate } from './validation/validation.types'
-import { FormState, FormFields, FormMethods, ValidationRules } from './useForm.types'
+import { FormState, FormFields, FormMethods, ValidationRules, ChangeFormState } from './useForm.types'
 
 const useForm = <Fields extends FormFields>(
   fields: Fields,
@@ -34,7 +34,9 @@ const useForm = <Fields extends FormFields>(
     saveFormStateToStore()
   }, [saveStateAllowed, saveState, state])
 
-  const changeFormState = (name: keyof Fields, value: string) => {
+  const changeFormState: ChangeFormState = (event) => {
+    const { value, name } = event.target
+
     allowSaveState()
     setFormState((prevState: State) => ({ ...prevState, [name]: value }))
   }

@@ -35,7 +35,7 @@ const associateActions = (store: Store, actions: StoreActions): AssociatedAction
   return associatedActions
 }
 
-const useStore = (store: Store, mapState: MapState, mapActions: MapActions) => {
+const useStore = (store: Store, mapState?: MapState, mapActions?: MapActions) => {
   const [, setStoreState] = useState()
 
   const state = mapState ? mapState(store.state) : store.state

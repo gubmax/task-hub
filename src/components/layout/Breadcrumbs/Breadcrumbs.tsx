@@ -2,11 +2,11 @@ import React, {
   FC, memo, useCallback, useState,
   useEffect, Fragment,
 } from 'react'
-import { Link } from 'react-router-dom'
 import { Location } from 'history'
 
 import { cn } from 'src/helpers'
 import { usePrevious } from 'src/hooks'
+import { Link } from 'src/components/layout'
 import { routes } from 'src/components/layout/Main/routes'
 import { ReactComponent as BookmarkIcon } from 'src/static/images/icons/bookmark-24px.svg'
 import { Breadcrumb } from './Breadcrumbs.types'
@@ -15,7 +15,7 @@ import s from './Breadcrumbs.module.scss'
 
 const Breadcrumbs: FC<{ location: Location }> = memo(({ location }) => {
   const [breadcrumbs, setBreadcrumbs] = useState<Breadcrumb[]>([])
-  const prevLocationRef = usePrevious(location)
+  const prevLocation = usePrevious(location)
 
   const setRouteBreadcrumbs = useCallback(
     () => {
@@ -32,12 +32,12 @@ const Breadcrumbs: FC<{ location: Location }> = memo(({ location }) => {
     () => {
       if (
         !breadcrumbs.length
-        || (prevLocationRef?.pathname !== location.pathname)
+        || (prevLocation?.pathname !== location.pathname)
       ) {
         setRouteBreadcrumbs()
       }
     },
-    [breadcrumbs.length, location.pathname, prevLocationRef, setRouteBreadcrumbs]
+    [breadcrumbs.length, location.pathname, prevLocation, setRouteBreadcrumbs]
   )
 
   return (

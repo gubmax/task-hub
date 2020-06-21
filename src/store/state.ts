@@ -14,6 +14,7 @@ const initialState: MainState = {
   user: {
     accessToken: 'TOKEN',
   },
+  loading: false,
   showSidebar: showSidebar === null || showSidebar,
   search: {
     isSearching: false,

@@ -8,6 +8,7 @@ export type MainState = {
   user: {
     accessToken: string | null,
   },
+  loading: boolean,
   showSidebar: boolean,
   search: {
     isSearching: boolean,

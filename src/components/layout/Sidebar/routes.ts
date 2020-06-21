@@ -12,23 +12,23 @@ interface ISidebarRoutes {
 }
 
 const routes: { [key: string]: ISidebarRoutes } = {
-  '': {
+  '/': {
     name: 'Projects',
     iconComponent: ProjectsIcon,
   },
-  calendar: {
+  '/calendar': {
     name: 'Calendar',
     iconComponent: CalendarIcon,
   },
-  review: {
+  '/review': {
     name: 'Review',
     iconComponent: ReviewIcon,
   },
-  info: {
+  '/info': {
     name: 'Info',
     iconComponent: InfoIcon,
   },
-  settings: {
+  '/settings': {
     name: 'Settings',
     iconComponent: SettingsIcon,
   },

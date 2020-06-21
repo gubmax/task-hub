@@ -7,6 +7,8 @@ export type ActionList = {
   setThemeBySystem: (payload: boolean) => void,
   setAcessToken: (payload: string) => void,
   removeAcessToken: () => void,
+  setLoadingStart: () => void,
+  setLoadingEnd: () => void,
   toggleSidebar: () => void,
   setSearching: (payload: boolean) => void,
 }

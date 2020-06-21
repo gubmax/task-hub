@@ -1,17 +1,17 @@
 import { ComponentType } from 'react'
-import { RouteProps } from 'react-router'
 
 import {
   LOCATION_ROOT, LOCATION_CALENDAR, LOCATION_REVIEW, LOCATION_INFO,
   LOCATION_SEARCH, LOCATION_SETTINGS,
 } from 'src/helpers'
 import {
-  ProjectsPage, CalendarPage, ReviewPage, InfoPage, SearchPage, SettingsPage,
+  ProjectsPage, CalendarPage, ReviewPage, InfoPage, SearchPage,
 } from 'src/components/pages'
 
-export interface Route extends RouteProps {
+export interface Route {
   path: string,
-  component: ComponentType,
+  exact: boolean,
+  component: ComponentType | string,
   breadcrumb?: string,
 }
 
@@ -49,7 +49,7 @@ const routes: Route[] = [
   {
     path: LOCATION_SETTINGS,
     exact: true,
-    component: SettingsPage,
+    component: 'SettingsPage',
     breadcrumb: 'settings',
   },
 ]

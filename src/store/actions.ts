@@ -37,6 +37,14 @@ const actions: MainActions = {
     })
   },
 
+  setLoadingStart: ({ setState }) => {
+    setState({ loading: true })
+  },
+
+  setLoadingEnd: ({ setState }) => {
+    setState({ loading: false })
+  },
+
   toggleSidebar: ({ state, setState }) => {
     const { showSidebar } = state
     setState({ showSidebar: !showSidebar })

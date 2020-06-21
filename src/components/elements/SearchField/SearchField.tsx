@@ -2,11 +2,14 @@ import React, {
   FC, memo, useState, useRef,
   useCallback, ChangeEvent, KeyboardEvent, useEffect,
 } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import { ENDPOINT_SEARCH, cn } from 'src/helpers'
 import { Field } from 'src/components/elements'
-import { useStore, useRequest, useDebouncedCallback, useClickOutside } from 'src/hooks'
+import {
+  useHistory, useStore, useRequest, useDebouncedCallback,
+  useClickOutside,
+} from 'src/hooks'
 import { ReactComponent as SearchIcon } from 'src/static/images/icons/search-24px.svg'
 import { ReactComponent as ClearIcon } from 'src/static/images/icons/clear-24px.svg'
 import { SearchFieldProps } from './SearchField.types'
@@ -14,7 +17,7 @@ import s from './SearchField.module.scss'
 
 const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false }) => {
   const history = useHistory()
-  const { pathname } = useLocation()
+  const location = useLocation()
   const [, { setSearching }] = useStore()
   const [, searchFetch] = useRequest({ url: ENDPOINT_SEARCH, preload: true })
 
@@ -24,8 +27,8 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
       return
     }
 
-    if (pathname !== ENDPOINT_SEARCH) {
-      history.push(ENDPOINT_SEARCH)
+    if (location.pathname !== ENDPOINT_SEARCH) {
+      history.push(ENDPOINT_SEARCH, { from: location })
     }
 
     setSearching(true)
@@ -36,7 +39,7 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const isSearchPage = pathname === ENDPOINT_SEARCH
+  const isSearchPage = location.pathname === ENDPOINT_SEARCH
 
   useEffect(
     () => {

@@ -1,8 +1,8 @@
 import React, { FC, memo, useMemo, useCallback } from 'react'
-import { Link } from 'react-router-dom'
 
 import { setBooleanItemToLocalStorage, LOCATION_SIDEBAR } from 'src/helpers'
 import { useStore, useAuth, useWindowSize } from 'src/hooks'
+import { Link } from 'src/components/layout'
 import { Logo, SearchField } from 'src/components/elements'
 import { ReactComponent as MenuIcon } from 'src/static/images/icons/menu-24px.svg'
 import { ReactComponent as SignOutIcon } from 'src/static/images/icons/sign-out-24px.svg'
@@ -28,7 +28,7 @@ const Header: FC<HeaderProps> = memo(({ iconWithLink }) => {
     () => (
       <MenuIcon
         className={s.sidebarIcon}
-        onClick={iconWithLink ? undefined : toggleSidebarMode}
+        {...(!iconWithLink && {onClick: toggleSidebarMode})}
         onKeyPress={toggleSidebarMode}
         role="button"
         tabIndex={0}

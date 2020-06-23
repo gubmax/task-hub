@@ -2,6 +2,8 @@
   "name": "tusk-hub",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "author": "Maksim Gubyshev <gubyshev@gmail.com> (https://github.com/gubmax)",
   "dependencies": {
     "@types/jest": "25.2.1",
     "@types/node": "13.11.0",

@@ -20,11 +20,13 @@ const Sidebar: FC<SidebarProps> = memo(({ pathname, fullscreen = false, goBack }
   const routesTemplate = useMemo(() => (
     Object.keys(routes).map((key) => {
       const { iconComponent: Icon, name } = routes[key]
+      const classNames = cn(
+        s.listItem,
+        pathname === key && s.isActive,
+      )
+
       return (
-        <Link key={key} to={key} className={cn(
-          s.listItem,
-          pathname === key && s.isActive,
-        )}>
+        <Link key={key} to={key} className={classNames}>
           <Icon className={s.listIcon} />
           <span>{name}</span>
         </Link>
@@ -39,7 +41,13 @@ const Sidebar: FC<SidebarProps> = memo(({ pathname, fullscreen = false, goBack }
   )
 
   return (
-    <div className={classNames} onClick={goBack}>
+    <div
+      className={classNames}
+      role="link"
+      tabIndex={0}
+      onClick={goBack}
+      onKeyPress={goBack}
+    >
       <div
         className={s.nav}
         onClick={onNavClick}

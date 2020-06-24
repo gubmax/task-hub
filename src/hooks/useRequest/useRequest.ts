@@ -71,7 +71,7 @@ const useRequest: useRequestType = ({ url, data, preload }) => {
     }
 
     if (preload) {
-      getData() 
+      getData()
     }
 
     return () => {

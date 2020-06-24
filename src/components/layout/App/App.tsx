@@ -2,7 +2,7 @@ import React, { FC, useEffect, useMemo } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import { useTheme } from 'src/hooks'
-import { Page } from '../Page'
+import { Page } from 'src/components/layout'
 
 const App: FC = () => {
   const [, { initThemeChanger }] = useTheme()
@@ -10,7 +10,7 @@ const App: FC = () => {
   // Set theme
   useEffect(
     () => { initThemeChanger() },
-    [initThemeChanger]
+    [initThemeChanger],
   )
 
   return useMemo(() => (

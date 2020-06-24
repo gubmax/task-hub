@@ -10,7 +10,7 @@ import {
 
 export interface Route {
   path: string,
-  exact: boolean,
+  exact?: boolean,
   component: ComponentType | string,
   breadcrumb?: string,
 }
@@ -20,35 +20,30 @@ const routes: Route[] = [
     path: LOCATION_ROOT,
     exact: true,
     component: ProjectsPage,
-    breadcrumb: 'projects'
+    breadcrumb: 'projects',
   },
   {
     path: LOCATION_CALENDAR,
-    exact: true,
     component: CalendarPage,
-    breadcrumb: 'calendar'
+    breadcrumb: 'calendar',
   },
   {
     path: LOCATION_REVIEW,
-    exact: true,
     component: ReviewPage,
     breadcrumb: 'review',
   },
   {
     path: LOCATION_INFO,
-    exact: true,
     component: InfoPage,
     breadcrumb: 'info',
   },
   {
     path: LOCATION_SEARCH,
-    exact: true,
     component: SearchPage,
     breadcrumb: 'search',
   },
   {
     path: LOCATION_SETTINGS,
-    exact: true,
     component: 'SettingsPage',
     breadcrumb: 'settings',
   },

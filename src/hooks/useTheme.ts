@@ -5,9 +5,13 @@ import {
   getCurrThemeMode, setTheme,
 } from 'src/helpers'
 import { useStore } from 'src/hooks'
+import { Theme } from 'src/helpers/theme'
 
 const useTheme = (): [
-  typeof themeState,
+  {
+    bySystem: boolean;
+    mode: Theme;
+  },
   {
     initThemeChanger: () => void,
     toggleThemeBySystem: (value: boolean) => void,
@@ -24,8 +28,8 @@ const useTheme = (): [
     const darkModeMediaQuery = getDarkModeMediaQuery()
     darkModeMediaQuery.addListener((e) => {
       const isDarkMode = e.matches
-      const currTheme = getThemeMode(isDarkMode)
-      setTheme(currTheme)
+      const theme = getThemeMode(isDarkMode)
+      setTheme(theme)
     })
   }, [bySystem, mode])
 
@@ -56,7 +60,7 @@ const useTheme = (): [
       initThemeChanger,
       toggleThemeBySystem,
       setDarkMode,
-    }
+    },
   ]
 }
 

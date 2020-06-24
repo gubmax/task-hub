@@ -1,19 +1,21 @@
-import React, { FC, memo, useMemo, createElement } from 'react'
+import React, {
+  FC, memo, useMemo, createElement,
+} from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import { useStore } from 'src/hooks'
 import { Breadcrumbs, Loadable } from 'src/components/layout'
+import { Loader } from 'src/components/elements'
 import { routes } from './routes'
 import { MainProps } from './Main.types'
 import s from './Main.module.scss'
-import { Loader } from 'src/components/elements'
 
 const Main: FC<MainProps> = memo(({ location }) => {
   const [, { setLoadingStart, setLoadingEnd }] = useStore()
 
   const routesTemplate = useMemo(
     () => (
-      routes.map(({ path, exact, component }) => {
+      routes.map(({ path, exact = false, component }) => {
         const routeTemplate = typeof component === 'string'
           ? (
             <Loadable
@@ -27,17 +29,13 @@ const Main: FC<MainProps> = memo(({ location }) => {
           : createElement(component)
 
         return (
-          <Route
-            key={path as string}
-            path={path}
-            exact={exact}
-          >
+          <Route key={path} path={path} exact={exact}>
             {routeTemplate}
-          </Route>       
+          </Route>
         )
       })
     ),
-    [setLoadingStart, setLoadingEnd]
+    [setLoadingStart, setLoadingEnd],
   )
 
   return (

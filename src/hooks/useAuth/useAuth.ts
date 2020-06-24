@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from 'react'
 
 import { ENDPOINT_SIGNIN, LOCATION_ROOT } from 'src/helpers'
-import { useHistory, useStore, useRequest, } from 'src/hooks'
+import { useHistory, useStore, useRequest } from 'src/hooks'
 import { UseAuth } from './useAuth.types'
 
 const ACCESS_TOKEN = 'access-token'
@@ -29,7 +29,7 @@ const useAuth: UseAuth = () => {
       history.goBack()
       return
     }
-    
+
     history.push(LOCATION_ROOT, { from: history.location })
   }, [fetchAuth, setAcessToken, history])
 
@@ -37,7 +37,7 @@ const useAuth: UseAuth = () => {
     localStorage.removeItem(ACCESS_TOKEN)
     removeAcessToken()
     history.push(ENDPOINT_SIGNIN, { from: history.location })
-  }, [removeAcessToken, history,])
+  }, [removeAcessToken, history])
 
   return useMemo(() => [
     { ...authState, accessToken: token },

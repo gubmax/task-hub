@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 
 import { isEmptyField, validationRules } from './validation'
 import { ValidationRule, Validate } from './validation/validation.types'
-import { FormState, FormFields, FormMethods, ValidationRules, ChangeFormState } from './useForm.types'
+import {
+  FormState, FormFields, FormMethods, ValidationRules, ChangeFormState,
+} from './useForm.types'
 
 const useForm = <Fields extends FormFields>(
   fields: Fields,
@@ -66,7 +68,7 @@ const useForm = <Fields extends FormFields>(
 
   const trimFormStateValues = () => {
     const trimmedState = Object.keys(state).reduce<State>((acc, key: keyof State) => {
-      const currVal = state[key];
+      const currVal = state[key]
       if (key !== undefined && currVal !== undefined) {
         acc[key] = currVal.trim()
       }
@@ -76,8 +78,10 @@ const useForm = <Fields extends FormFields>(
     return trimmedState
   }
 
-  const validateFormState = (validatableState: State = state, validatableFields: Fields = fields): boolean => {
-    const errorsObj: State = {};
+  const validateFormState = (
+    validatableState: State = state, validatableFields: Fields = fields,
+  ): boolean => {
+    const errorsObj: State = {}
 
     Object.keys(validatableFields).forEach((key: keyof Fields) => {
       const currVal = validatableState[key]
@@ -101,8 +105,7 @@ const useForm = <Fields extends FormFields>(
       }
 
       currRules.find((rule) => {
-        const {name, payload}: { name: ValidationRule, payload?: any } =
-          typeof rule === 'object' ? rule : {name: rule}
+        const { name, payload }: { name: ValidationRule, payload?: any } = typeof rule === 'object' ? rule : { name: rule }
 
         if (name !== undefined) {
           return !validate(name, payload, validationRules[name])
@@ -113,14 +116,18 @@ const useForm = <Fields extends FormFields>(
     })
 
     setErrors(errorsObj)
-    return !!(!Object.keys(errorsObj).length)
+    return !Object.keys(errorsObj).length
   }
 
   return [
     state, errors,
     {
-      setFormState, changeFormState, resetFormState, clearFormState,
-      trimFormStateValues, validateFormState,
+      setFormState,
+      changeFormState,
+      resetFormState,
+      clearFormState,
+      trimFormStateValues,
+      validateFormState,
     },
   ]
 }

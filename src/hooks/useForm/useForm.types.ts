@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, ChangeEvent, KeyboardEvent } from 'react'
+import { Dispatch, SetStateAction, ChangeEvent } from 'react'
 
 import { ValidationRule } from './validation/validation.types'
 
@@ -7,7 +7,7 @@ type ValidationRuleWithPayload = {
   payload: any,
 }
 
-export type ValidationRules =  Array<ValidationRule | ValidationRuleWithPayload>
+export type ValidationRules = Array<ValidationRule | ValidationRuleWithPayload>
 
 export type FormFields<T extends string | number | symbol = any> = { [K in T]: ValidationRules }
 

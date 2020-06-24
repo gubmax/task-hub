@@ -25,7 +25,7 @@ const Breadcrumbs: FC<{ location: Location }> = memo(({ location }) => {
         setBreadcrumbs([{ name: breadcrumb, path }])
       }
     },
-    [location.pathname]
+    [location.pathname],
   )
 
   useEffect(
@@ -37,7 +37,7 @@ const Breadcrumbs: FC<{ location: Location }> = memo(({ location }) => {
         setRouteBreadcrumbs()
       }
     },
-    [breadcrumbs.length, location.pathname, prevLocation, setRouteBreadcrumbs]
+    [breadcrumbs.length, location.pathname, prevLocation, setRouteBreadcrumbs],
   )
 
   return (
@@ -48,7 +48,7 @@ const Breadcrumbs: FC<{ location: Location }> = memo(({ location }) => {
           const isLastCrumb = index === breadcrumbs.length - 1
           return (
             <Fragment key={path}>
-              <Link 
+              <Link
                 className={cn(s.link, isLastCrumb && s.isActive)}
                 to={path}
               >

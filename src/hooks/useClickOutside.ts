@@ -18,14 +18,14 @@ const useClickOutside = <RefType extends Node>(
       }
 
       if (handle) {
-        document.body.addEventListener('click', checkClick) 
+        document.body.addEventListener('click', checkClick)
       }
 
       return () => {
         document.body.removeEventListener('click', checkClick)
       }
     },
-    [handle, onClickOutside]
+    [handle, onClickOutside],
   )
 
   return elRef

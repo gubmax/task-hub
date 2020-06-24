@@ -1,4 +1,6 @@
-import React, { FC, useMemo, useCallback, ChangeEvent } from 'react'
+import React, {
+  FC, useMemo, useCallback, ChangeEvent,
+} from 'react'
 
 import { useTheme } from 'src/hooks'
 import { Switch, List, Block } from 'src/components/elements'
@@ -12,7 +14,7 @@ const ThemeToggler: FC = () => {
     (event: ChangeEvent<HTMLInputElement>) => {
       toggleThemeBySystem(event.target.checked)
     },
-    [toggleThemeBySystem]
+    [toggleThemeBySystem],
   )
 
   return useMemo(() => (

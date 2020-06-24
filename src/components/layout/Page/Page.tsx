@@ -5,13 +5,12 @@ import React, {
 import { Switch, Route } from 'react-router-dom'
 
 import { LOCATION_SIGNIN, LOCATION_SIDEBAR } from 'src/helpers'
-import { useHistory, useStore, useWindowSize } from 'src/hooks'
-import { LinearLoader } from 'src/components/layout'
+import { useStore, useHistory, useWindowSize } from 'src/hooks'
+import {
+  Header, Sidebar, Main, LinearLoader,
+} from 'src/components/layout'
 import { ModalWindow, SwitchTransition } from 'src/components/elements'
 import { SignInPage } from 'src/components/pages'
-import { Header } from '../Header'
-import { Sidebar } from '../Sidebar'
-import { Main } from '../Main'
 import { LocationType } from './Page.types'
 import s from './Page.module.scss'
 
@@ -72,7 +71,7 @@ const Page: FC = memo(() => {
         </Route>
         <Route path="*">
           <div className={s.base}>
-            <LinearLoader active={loading} />  
+            <LinearLoader active={loading} />
             <Header iconWithLink={collapseSidebar} />
             <div className={s.main}>
               {sidebarTemplate}

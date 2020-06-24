@@ -1,9 +1,11 @@
-import React, {FC, memo, useRef, useEffect} from 'react'
+import React, {
+  FC, memo, useRef, useEffect,
+} from 'react'
 
 import { cn } from 'src/helpers'
+import { usePrevious } from 'src/hooks'
 import { LinearLoaderProps } from './LinearLoader.types'
 import s from './LinearLoader.module.scss'
-import { usePrevious } from 'src/hooks'
 
 const LinearLoader: FC<LinearLoaderProps> = memo(({ active }) => {
   const prevActive = usePrevious(active)

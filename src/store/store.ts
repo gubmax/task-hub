@@ -20,7 +20,7 @@ const setState: StoreSetState = (store, newState, afterUpdateCallback) => {
 }
 
 const associateActions = (store: Store, actions: StoreActions): AssociatedActions => {
-  const associatedActions: AssociatedActions = {};
+  const associatedActions: AssociatedActions = {}
 
   Object.keys(actions).forEach((key) => {
     if (typeof actions[key] === 'function') {
@@ -69,7 +69,7 @@ const useStore = (store: Store, mapState?: MapState, mapActions?: MapActions) =>
         (listener) => listener !== newListener,
       )
     }
-  }, [mapState, store.state, store.listeners])
+  }, [mapState, store])
 
   return [state, actions]
 }
@@ -84,7 +84,7 @@ const createStore: CreateStore = (initialState, actions) => {
   store.setState = setState.bind(null, store)
 
   if (actions) {
-    store.actions = associateActions(store, actions) 
+    store.actions = associateActions(store, actions)
   }
 
   return useStore.bind(null, store) as UseStore

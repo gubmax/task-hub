@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react'
 
 import { useAuth, useForm } from 'src/hooks'
 import { FormFields } from 'src/hooks/useForm/useForm.types'
-import { Block, Button, Logo} from 'src/components/elements'
+import { Block, Button, Logo } from 'src/components/elements'
 import { Form, FormField } from 'src/components/composite'
 import s from './SignInForm.module.scss'
 
@@ -25,14 +25,14 @@ const SignInForm: FC = () => {
       const trimmedState = trimFormStateValues()
       const isValid = validateFormState(trimmedState)
       setFormState({ ...trimmedState })
-  
+
       if (!isValid) {
-        return
+        return Promise.resolve()
       }
-  
+
       return signIn()
     },
-    [setFormState, signIn, trimFormStateValues, validateFormState]
+    [setFormState, signIn, trimFormStateValues, validateFormState],
   )
 
   return (

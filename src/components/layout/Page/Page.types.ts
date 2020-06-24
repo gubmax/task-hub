@@ -1,4 +1,4 @@
 export type LocationType = {
-  isSidebar: boolean, 
+  isSidebar: boolean,
   isModal: boolean,
 }

@@ -21,6 +21,10 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
   const [, { setSearching }] = useStore()
   const [, searchFetch] = useRequest({ url: ENDPOINT_SEARCH, preload: true })
 
+  const [collapseField, setCollapseField] = useState(collapse)
+  const [value, setValue] = useState('')
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
   // Debouncing search
   const [debounceSearch, searchImmediately] = useDebouncedCallback(() => {
     if (value === '') {
@@ -35,10 +39,6 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
     searchFetch().finally(() => setSearching(false))
   }, 500)
 
-  const [collapseField, setCollapseField] = useState(collapse)
-  const [value, setValue] = useState('')
-  const inputRef = useRef<HTMLInputElement | null>(null)
-
   const isSearchPage = location.pathname === ENDPOINT_SEARCH
 
   useEffect(
@@ -47,7 +47,7 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
         setCollapseField(true)
       }
     },
-    [collapse, collapseField]
+    [collapse, collapseField],
   )
 
   const elRef = useClickOutside<HTMLDivElement>(
@@ -56,7 +56,7 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
         setCollapseField(true)
       }
     },
-    !collapseField
+    !collapseField,
   )
 
   const onSearchHandler = useCallback(() => {
@@ -82,7 +82,7 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
       setValue(event.target.value)
       debounceSearch()
     },
-    [debounceSearch]
+    [debounceSearch],
   )
 
   const onKeyPressHandler = useCallback(
@@ -91,7 +91,7 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
         searchImmediately()
       }
     },
-    [searchImmediately]
+    [searchImmediately],
   )
 
   const clearValue = useCallback(
@@ -104,7 +104,7 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
 
       setValue('')
     },
-    [value, history]
+    [value, history],
   )
 
   const classNames = cn(

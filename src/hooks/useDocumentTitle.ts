@@ -7,11 +7,11 @@ const useDocumentTitle = (title?: string): string => useMemo(
       ? `${title} · ${mainTitle}`
       : mainTitle
 
-    document.title  = currTitle
+    document.title = currTitle
 
     return currTitle
   },
-  [title]
+  [title],
 )
 
 export { useDocumentTitle }

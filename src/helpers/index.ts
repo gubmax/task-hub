@@ -6,4 +6,3 @@ export {
   getDarkModeMediaQuery, darkModeMatches, getThemeMode, getCurrThemeMode,
   setTheme, setMetaThemeColor,
 } from './theme'
-

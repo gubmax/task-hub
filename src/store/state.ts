@@ -1,5 +1,5 @@
 import { getBooleanItemFromLocalStorage, getCurrThemeMode } from 'src/helpers'
-import { Theme } from 'src/helpers/theme'  
+import { Theme } from 'src/helpers/theme'
 import { MainState } from './state.types'
 
 const showSidebar = getBooleanItemFromLocalStorage('showSidebar')
@@ -18,7 +18,7 @@ const initialState: MainState = {
   showSidebar: showSidebar === null || showSidebar,
   search: {
     isSearching: false,
-  }
+  },
 }
 
 export { initialState }

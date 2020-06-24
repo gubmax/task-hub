@@ -14,7 +14,7 @@ const Loader: FC<LoaderProps> = memo(({ small, white, className }) => {
 
   return (
     <span className={classNames}>
-      <span className={s.spinner}></span>
+      <span className={s.spinner} />
     </span>
   )
 })

@@ -6,13 +6,16 @@ import {
 import { LoadableProps, ResolveIndex } from './Loadable.types'
 
 const isWebpackReady = (moduleId: ResolveIndex) => {
+  // eslint-disable-next-line camelcase
   if (typeof __webpack_modules__ !== 'object') {
     return false
   }
 
+  // eslint-disable-next-line camelcase, no-undef
   return __webpack_modules__[moduleId as number] !== undefined
 }
 
+// eslint-disable-next-line no-undef
 const getWebpackModule = (id: ResolveIndex) => __webpack_require__(id)
 
 const Loadable: FC<LoadableProps> = memo(({
@@ -22,8 +25,8 @@ const Loadable: FC<LoadableProps> = memo(({
 }) => {
   const module = useMemo(() => {
     if (isWebpackReady(resolveIndex)) {
-      const module = getWebpackModule(resolveIndex)
-      return module.default || module
+      const webpackModule = getWebpackModule(resolveIndex)
+      return webpackModule.default || webpackModule
     }
 
     return null
@@ -37,7 +40,7 @@ const Loadable: FC<LoadableProps> = memo(({
       let didCancel = false
 
       if (loadableRef.current === null) {
-        onLoadingStart() 
+        onLoadingStart()
 
         load().then((component: any) => {
           loadableRef.current = component.default || component
@@ -53,7 +56,7 @@ const Loadable: FC<LoadableProps> = memo(({
         didCancel = true
       }
     },
-    [load, onLoadingEnd, onLoadingStart]
+    [load, onLoadingEnd, onLoadingStart],
   )
 
   if (loadableRef.current !== null) {

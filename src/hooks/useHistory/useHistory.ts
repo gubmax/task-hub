@@ -9,7 +9,7 @@ const useHistory = <LocationState = {}>() => {
   return {
     ...history,
     push: push as HistoryPush<LocationState>,
-    goBack: () => push(location.state.from.pathname)
+    goBack: () => push(location.state?.from?.pathname || '/'),
   }
 }
 

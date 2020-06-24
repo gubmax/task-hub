@@ -1,4 +1,3 @@
-
 export type ReducerStateType = {
   responseData: unknown | null,
   isLoading: boolean,
@@ -16,7 +15,7 @@ export type ReducerActionType = {
   payload: string | null,
 }
 
-export type useRequestType = <ResponseDataType>(props: { 
+export type useRequestType = <ResponseDataType>(props: {
   url: string,
   data?: ResponseDataType,
   preload?: boolean,

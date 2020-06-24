@@ -20,9 +20,9 @@ const Field = memo(
       onChange={onChange}
       onKeyPress={onKeyPress}
       autoComplete={autoComplete ? 'on' : 'off'}
-      autoFocus={autoFocus}
+      autoFocus={autoFocus} // eslint-disable-line jsx-a11y/no-autofocus
     />
-  ))
+  )),
 )
 
 export { Field }

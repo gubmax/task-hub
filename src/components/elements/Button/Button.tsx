@@ -20,16 +20,18 @@ const Button: FC<ButtonProps> = memo(({
 
   const clickHandler = useCallback(() => {
     if (loading) {
-      return
+      return undefined
     }
 
     if (onClick) {
       return onClick()
     }
+
+    return undefined
   }, [loading, onClick])
 
   return (
-    <button
+    <button // eslint-disable-line react/button-has-type
       className={classNames}
       type={type}
       onClick={clickHandler}

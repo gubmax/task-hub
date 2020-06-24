@@ -1,4 +1,6 @@
-import React, { FC, memo, useMemo, useCallback } from 'react'
+import React, {
+  FC, memo, useMemo, useCallback,
+} from 'react'
 
 import { setBooleanItemToLocalStorage, LOCATION_SIDEBAR } from 'src/helpers'
 import { useStore, useAuth, useWindowSize } from 'src/hooks'
@@ -20,28 +22,28 @@ const Header: FC<HeaderProps> = memo(({ iconWithLink }) => {
     () => {
       setBooleanItemToLocalStorage('showSidebar', !showSidebar)
       toggleSidebar()
-    }, 
-    [showSidebar, toggleSidebar]
+    },
+    [showSidebar, toggleSidebar],
   )
 
   const menuIcon = useMemo(
     () => (
       <MenuIcon
         className={s.sidebarIcon}
-        {...(!iconWithLink && {onClick: toggleSidebarMode})}
+        {...(!iconWithLink && { onClick: toggleSidebarMode })}
         onKeyPress={toggleSidebarMode}
         role="button"
         tabIndex={0}
       />
     ),
-    [iconWithLink, toggleSidebarMode]
+    [iconWithLink, toggleSidebarMode],
   )
 
   const menuIconTemplate = useMemo(() => {
     if (iconWithLink) {
       const to = {
         pathname: LOCATION_SIDEBAR,
-        state: { 
+        state: {
           isSidebar: true,
           isModal: true,
         },

@@ -11,11 +11,11 @@ const Form: FC<FormProps> = memo(({ className, children, onSubmit }) => {
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-  
+
       if (fetch || onSubmit === undefined) {
         return
       }
-  
+
       setFetch(true)
       onSubmit().finally(() => {
         setFetch(false)

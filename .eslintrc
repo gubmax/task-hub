@@ -8,27 +8,30 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 10,
+    "ecmaVersion": 11,
     "sourceType": "module",
     "allowImportExportEverywhere": true,
     "ecmaFeatures": { "jsx": true }
   },
   "settings": {
     "import/resolver": {
-      "node": { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+      "node": {
+        "paths": ["."],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     }
   },
-  "extends": ["react-app", "airbnb"],
-  "plugins": ["@typescript-eslint", "react-hooks"],
+  "extends": ["airbnb", "airbnb/hooks"],
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "react/jsx-filename-extension": [
-      "on",
-      { "extensions": [".js", ".ts", ".jsx", ".tsx"] }
-    ],
-    "react/prop-types": "off",
     "semi": ["error","never"],
     "no-debugger": ["warn"],
-    "quotes": ["error","single"],
+    "quotes": ["error", "single"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "react/prop-types": "off",
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-props-no-spreading": ["error", { "custom": "ignore" }],
     "import/prefer-default-export": "off",
     "import/extensions": [
       "error",

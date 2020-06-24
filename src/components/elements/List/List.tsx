@@ -10,7 +10,7 @@ import s from './List.module.scss'
 const List: FC<ListProps> = memo(({ className, children }) => {
   const addClassName = useCallback(
     (child: ReactElement) => cloneElement(child, {
-      className: cn(s.listItem, child.props.className)
+      className: cn(s.listItem, child.props.className),
     }),
     [],
   )
@@ -24,7 +24,7 @@ const List: FC<ListProps> = memo(({ className, children }) => {
         </>
       ))
     ),
-    [addClassName, children]
+    [addClassName, children],
   )
 
   return (

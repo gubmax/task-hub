@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react'
 import { Link as RouterLink, LinkProps, useLocation } from 'react-router-dom'
 
-const Link: FC<LinkProps> = memo(({to, ...rest}) => {
+const Link: FC<LinkProps> = memo(({ to, ...rest }) => {
   const location = useLocation()
 
   const linkTo = typeof to === 'string'
@@ -9,7 +9,7 @@ const Link: FC<LinkProps> = memo(({to, ...rest}) => {
     : to
 
   const linkState = typeof to === 'object'
-    ? { ...to.state, from: location}
+    ? { ...to.state, from: location }
     : { from: location }
 
   return (
@@ -17,7 +17,7 @@ const Link: FC<LinkProps> = memo(({to, ...rest}) => {
       {...rest}
       to={{
         ...linkTo,
-        ...{ state: linkState}
+        ...{ state: linkState },
       }}
     />
   )

@@ -34,12 +34,18 @@
     "typescript": "3.9.5"
   },
   "lint-staged": {
-    "**/*.ts?(x)": "npm run lint -- --fix"
+    "**/*.ts?(x)": [
+      "tsc --noEmit",
+      "npm run lint -- --fix"
+    ]
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "engines" : {
+    "node" : ">=10"
   },
   "browserslist": {
     "production": [

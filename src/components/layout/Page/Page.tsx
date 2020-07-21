@@ -4,7 +4,7 @@ import React, {
 } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import { LOCATION_SIGNIN, LOCATION_SIDEBAR } from 'src/helpers'
+import { LOCATION_SIGNIN, LOCATION_SIDEBAR, MEDIA_BREAKPOINT } from 'src/helpers'
 import { useStore, useHistory, useWindowSize } from 'src/hooks'
 import {
   Header, Sidebar, Main, LinearLoader,
@@ -34,7 +34,7 @@ const Page: FC = memo(() => {
   }, [isModalLocation, location])
 
   // Toggle sidebar on resize viewport
-  const [collapseSidebar] = useWindowSize('(max-width: 776px)')
+  const [collapseSidebar] = useWindowSize(MEDIA_BREAKPOINT)
 
   useEffect(() => {
     if (!collapseSidebar && isSidebarLocation) {

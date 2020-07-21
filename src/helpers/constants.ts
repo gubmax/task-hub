@@ -15,3 +15,6 @@ export const ENDPOINT_SIGNIN = '/sign-in'
 // Colors
 export const COLOR_LIGHT_PRIMARY = '#fff'
 export const COLOR_DARK_PRIMARY = '#212121'
+
+// Media query breakpoins
+export const MEDIA_BREAKPOINT = '(max-width: 776px)'

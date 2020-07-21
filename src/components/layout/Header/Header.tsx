@@ -2,7 +2,7 @@ import React, {
   FC, memo, useMemo, useCallback,
 } from 'react'
 
-import { setBooleanItemToLocalStorage, LOCATION_SIDEBAR } from 'src/helpers'
+import { setBooleanItemToLocalStorage, LOCATION_SIDEBAR, MEDIA_BREAKPOINT } from 'src/helpers'
 import { useStore, useAuth, useWindowSize } from 'src/hooks'
 import { Link } from 'src/components/layout'
 import { Logo, SearchField } from 'src/components/elements'
@@ -16,7 +16,7 @@ const Header: FC<HeaderProps> = memo(({ iconWithLink }) => {
   const [, { signOut }] = useAuth()
 
   // Toggle field visability on resize viewport
-  const [collapseSearch] = useWindowSize('(max-width: 776px)')
+  const [collapseSearch] = useWindowSize(MEDIA_BREAKPOINT)
 
   const toggleSidebarMode = useCallback(
     () => {

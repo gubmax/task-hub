@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 
-import { isEmptyField, validationRules } from './validation'
-import { ValidationRule, Validate } from './validation/validation.types'
+import { isEmptyField, validation } from './validation'
+import { Validation, Validate } from './validation/validation.types'
 import {
-  FormState, FormFields, FormMethods, ValidationRules, ChangeFormState,
+  FormState, FormFields, FormMethods, Rules,
+  ChangeFormState,
+  RuleWithPayload,
 } from './useForm.types'
 
 const useForm = <Fields extends FormFields>(
@@ -85,10 +87,10 @@ const useForm = <Fields extends FormFields>(
 
     Object.keys(validatableFields).forEach((key: keyof Fields) => {
       const currVal = validatableState[key]
-      const currRules: ValidationRules = validatableFields[key]
+      const currRules: Rules = validatableFields[key]
 
       const validate = (
-        name: ValidationRule,
+        name: keyof Validation,
         payload: any,
         validateFunc: Validate<any>,
       ) => {
@@ -105,10 +107,12 @@ const useForm = <Fields extends FormFields>(
       }
 
       currRules.find((rule) => {
-        const { name, payload }: { name: ValidationRule, payload?: any } = typeof rule === 'object' ? rule : { name: rule }
+        const { name, payload } = typeof rule === 'object'
+          ? rule
+          : { name: rule } as RuleWithPayload
 
         if (name !== undefined) {
-          return !validate(name, payload, validationRules[name])
+          return !validate(name, payload, validation[name])
         }
 
         return false

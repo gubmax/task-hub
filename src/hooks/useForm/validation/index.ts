@@ -1,1 +1,1 @@
-export { validationRules, isEmptyField } from './validation'
+export { validation, isEmptyField } from './validation'

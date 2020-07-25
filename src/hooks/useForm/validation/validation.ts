@@ -1,4 +1,4 @@
-import { Validate, ValidationRule } from './validation.types'
+import { Validate, Validation } from './validation.types'
 
 export const isEmptyField = (value: string | undefined): boolean => (
   value === undefined
@@ -68,7 +68,7 @@ const validateEmailField: Validate = (value) => {
   return true
 }
 
-export const validationRules: {[K in ValidationRule]: Validate<any>} = {
+export const validation: Validation = {
   required: validateRequiredField,
   length: validateFieldLength,
   integer: validateIntegerField,

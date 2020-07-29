@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { useState, useEffect, useMemo } from 'react'
 
+import { noop } from 'src/helpers'
 import {
   CreateStore, Listener, Store, MapState,
   MapActions, AssociatedActions, StoreActions, State,
@@ -78,7 +79,7 @@ const createStore: CreateStore = (initialState, actions) => {
   const store: Store = {
     state: initialState,
     listeners: [],
-    setState: () => {},
+    setState: noop,
   }
 
   store.setState = setState.bind(null, store)

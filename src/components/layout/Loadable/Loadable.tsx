@@ -3,6 +3,7 @@ import {
   useEffect, createElement, useMemo,
 } from 'react'
 
+import { noop } from 'src/helpers'
 import { LoadableProps, ResolveIndex } from './Loadable.types'
 
 const isWebpackReady = (moduleId: ResolveIndex) => {
@@ -20,8 +21,8 @@ const getWebpackModule = (id: ResolveIndex) => __webpack_require__(id)
 
 const Loadable: FC<LoadableProps> = memo(({
   load, resolveIndex, fallback,
-  onLoadingStart = () => {},
-  onLoadingEnd = () => {},
+  onLoadingStart = noop,
+  onLoadingEnd = noop,
 }) => {
   const module = useMemo(() => {
     if (isWebpackReady(resolveIndex)) {

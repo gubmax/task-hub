@@ -4,6 +4,7 @@ export type FieldProps = {
   name: string,
   className?: string,
   value?: string | number | string[],
+  label?: string,
   placeholder?: string,
   error?: string,
   password?: boolean,

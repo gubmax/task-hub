@@ -9,8 +9,7 @@ const FormField: FC<FormFieldProps> = memo(({
   className, label, error, ...rest
 }) => (
   <div className={cn(s.wrapper, className)}>
-    <Field error={error} {...rest} />
-    <span className={s.label}>{label}</span>
+    <Field error={error} label={label} {...rest} />
     <span className={s.error}>{error}</span>
   </div>
 ))

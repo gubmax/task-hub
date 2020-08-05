@@ -1,26 +1,14 @@
 .wrapper {
   position: relative;
   width: 100%;
-  padding: 24px 0;
+  padding-bottom: 20px;
   font-weight: 500;
 }
 
-.label,
 .error {
   display: block;
-  margin-left: 16px;
-}
-
-.label {
-  position: absolute;
-  top: 0;
-  color: var(--color-darker);
-  font-size: 1.15rem;
-  transition: color 0.2s;
-}
-
-.error {
   min-height: 1.2rem;
   margin-top: 4px;
+  margin-left: 16px;
   color: var(--color-error);
 }

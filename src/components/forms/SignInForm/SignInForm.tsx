@@ -59,7 +59,6 @@ const SignInForm: FC = () => {
             autoComplete
           />
           <Button
-            className={s.submitBtn}
             type="submit"
             primary
             large

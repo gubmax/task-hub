@@ -8,4 +8,4 @@ const SignInPage: FC = () => {
   return <SignInForm />
 }
 
-export { SignInPage }
+export default SignInPage

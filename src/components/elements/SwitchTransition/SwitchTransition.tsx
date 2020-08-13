@@ -1,11 +1,11 @@
-import React, { FC, memo, useMemo } from 'react'
+import React, { FC, useMemo } from 'react'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import { cn } from 'src/helpers'
 import { SwitchTransitionProps } from './SwitchTransition.types'
 import s from './SwitchTransition.module.scss'
 
-const SwitchTransition: FC<SwitchTransitionProps> = memo(({
+const SwitchTransition: FC<SwitchTransitionProps> = ({
   component = null,
   className, children, transitionKey, transitionClassNames,
 }) => {
@@ -36,6 +36,6 @@ const SwitchTransition: FC<SwitchTransitionProps> = memo(({
       </CSSTransition>
     </TransitionGroup>
   )
-})
+}
 
-export { SwitchTransition }
+export default SwitchTransition

@@ -8,4 +8,4 @@ const InfoPage: FC = () => {
   return <WorkInProgressMsg />
 }
 
-export { InfoPage }
+export default InfoPage

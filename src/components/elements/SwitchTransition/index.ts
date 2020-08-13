@@ -1,1 +1,1 @@
-export { SwitchTransition } from './SwitchTransition'
+export { default as SwitchTransition } from './SwitchTransition'

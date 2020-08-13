@@ -1,18 +1,20 @@
-import React, { FC, useCallback } from 'react'
+import React, { FC, useCallback, memo } from 'react'
 
 import { cn } from 'src/helpers'
+import { Theme } from 'src/helpers/theme'
 import { DummyCardProps } from './DummyCard.types'
+import { mapTheme } from './DummyCard.constants'
 import s from './DummyCard.module.scss'
 
 const DummyCard: FC<DummyCardProps> = ({
-  className, type, active, onClick,
+  className, text, type, active, onClick,
 }) => {
-  const handleClick = useCallback(() => onClick(type === 'dark'), [onClick, type])
+  const handleClick = useCallback(() => onClick(type === Theme.dark), [onClick, type])
 
   return (
     <div className={cn(s.wrapper, className)}>
       <div
-        className={cn(s.card, s[type], active && s.isActive)}
+        className={cn(s.card, s[mapTheme[type]], active && s.isActive)}
         role="button"
         tabIndex={0}
         onClick={handleClick}
@@ -31,9 +33,9 @@ const DummyCard: FC<DummyCardProps> = ({
           </div>
         </div>
       </div>
-      <span className={cn(s.text, active && s.isActive)}>{type}</span>
+      <span className={cn(s.text, active && s.isActive)}>{text}</span>
     </div>
   )
 }
 
-export { DummyCard }
+export default memo(DummyCard)

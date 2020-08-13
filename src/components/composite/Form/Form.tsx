@@ -1,27 +1,26 @@
 import React, {
-  FC, memo, useState, useCallback,
-  FormEvent,
+  FC, useState, useCallback, FormEvent,
 } from 'react'
 
 import { FormProps } from './Form.types'
 
-const Form: FC<FormProps> = memo(({ className, children, onSubmit }) => {
-  const [fetch, setFetch] = useState(false)
+const Form: FC<FormProps> = ({ className, children, onSubmit }) => {
+  const [fetching, setFetching] = useState(false)
 
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
 
-      if (fetch || onSubmit === undefined) {
+      if (fetching || onSubmit === undefined) {
         return
       }
 
-      setFetch(true)
+      setFetching(true)
       onSubmit().finally(() => {
-        setFetch(false)
+        setFetching(false)
       })
     },
-    [fetch, onSubmit],
+    [fetching, onSubmit],
   )
 
   return (
@@ -29,6 +28,6 @@ const Form: FC<FormProps> = memo(({ className, children, onSubmit }) => {
       {children}
     </form>
   )
-})
+}
 
-export { Form }
+export default Form

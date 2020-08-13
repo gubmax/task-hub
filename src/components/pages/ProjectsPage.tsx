@@ -8,4 +8,4 @@ const ProjectsPage: FC = () => {
   return <WorkInProgressMsg />
 }
 
-export { ProjectsPage }
+export default ProjectsPage

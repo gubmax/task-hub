@@ -4,7 +4,7 @@ import { cn } from 'src/helpers'
 import { LoaderProps } from './Loader.types'
 import s from './Loader.module.scss'
 
-const Loader: FC<LoaderProps> = memo(({ small, white, className }) => {
+const Loader: FC<LoaderProps> = ({ small, white, className }) => {
   const classNames = cn(
     s.loader,
     small && s.small,
@@ -17,6 +17,6 @@ const Loader: FC<LoaderProps> = memo(({ small, white, className }) => {
       <span className={s.spinner} />
     </span>
   )
-})
+}
 
-export { Loader }
+export default memo(Loader)

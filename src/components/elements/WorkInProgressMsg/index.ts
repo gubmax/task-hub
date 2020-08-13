@@ -1,1 +1,1 @@
-export { WorkInProgressMsg } from './WorkInProgressMsg'
+export { default as WorkInProgressMsg } from './WorkInProgressMsg'

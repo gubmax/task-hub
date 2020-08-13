@@ -1,13 +1,13 @@
 import React, {
-  FC, memo, useMemo, useCallback,
-  cloneElement, Children, ReactElement,
+  FC, useMemo, useCallback, cloneElement,
+  Children, ReactElement,
 } from 'react'
 
 import { cn } from 'src/helpers'
 import { ListProps } from './List.types'
 import s from './List.module.scss'
 
-const List: FC<ListProps> = memo(({ className, children }) => {
+const List: FC<ListProps> = ({ className, children }) => {
   const addClassName = useCallback(
     (child: ReactElement) => cloneElement(child, {
       className: cn(s.listItem, child.props.className),
@@ -32,6 +32,6 @@ const List: FC<ListProps> = memo(({ className, children }) => {
       {itemsTemplate}
     </div>
   )
-})
+}
 
-export { List }
+export default List

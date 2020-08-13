@@ -10,7 +10,7 @@ import { routes } from './routes'
 import { SidebarProps } from './Sidebar.types'
 import s from './Sidebar.module.scss'
 
-const Sidebar: FC<SidebarProps> = memo(({ pathname, fullscreen = false, goBack }) => {
+const Sidebar: FC<SidebarProps> = ({ pathname, fullscreen = false, goBack }) => {
   const [{ showSidebar }] = useStore()
 
   const onNavClick = useCallback((e: MouseEvent | KeyboardEvent) => (
@@ -61,6 +61,6 @@ const Sidebar: FC<SidebarProps> = memo(({ pathname, fullscreen = false, goBack }
       </div>
     </div>
   )
-})
+}
 
-export { Sidebar }
+export default memo(Sidebar)

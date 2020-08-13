@@ -1,1 +1,1 @@
-export { LinearLoader } from './LinearLoader'
+export { default as LinearLoader } from './LinearLoader'

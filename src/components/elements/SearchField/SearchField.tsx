@@ -15,7 +15,7 @@ import { ReactComponent as ClearIcon } from 'src/static/images/icons/clear-24px.
 import { SearchFieldProps } from './SearchField.types'
 import s from './SearchField.module.scss'
 
-const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false }) => {
+const SearchField: FC<SearchFieldProps> = ({ className, collapse = false }) => {
   const history = useHistory()
   const location = useLocation()
   const [, { setSearching }] = useStore()
@@ -146,6 +146,6 @@ const SearchField: FC<SearchFieldProps> = memo(({ className, collapse = false })
       }
     </div>
   )
-})
+}
 
-export { SearchField }
+export default memo(SearchField)

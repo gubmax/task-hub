@@ -3,6 +3,7 @@ import React, {
 } from 'react'
 
 import { useTheme } from 'src/hooks'
+import { Theme } from 'src/helpers/theme'
 import { Switch, List, Block } from 'src/components/elements'
 import { DummyCard } from './DummyCard'
 import s from './ThemeToggler.module.scss'
@@ -23,14 +24,16 @@ const ThemeToggler: FC = () => {
         <div className={s.wrapper}>
           <DummyCard
             className={s.leftCard}
-            type="light"
-            active={mode === 'light'}
+            text="Light"
+            type={Theme.light}
+            active={mode === Theme.light}
             onClick={setDarkMode}
           />
           <DummyCard
             className={s.rightCard}
-            type="dark"
-            active={mode === 'dark'}
+            text="Dark"
+            type={Theme.dark}
+            active={mode === Theme.dark}
             onClick={setDarkMode}
           />
         </div>
@@ -47,4 +50,4 @@ const ThemeToggler: FC = () => {
   ), [bySystem, mode, setDarkMode, changeModeHandler])
 }
 
-export { ThemeToggler }
+export default ThemeToggler

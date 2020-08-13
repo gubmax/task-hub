@@ -20,4 +20,4 @@ const App: FC = () => {
   ), [])
 }
 
-export { App }
+export default App

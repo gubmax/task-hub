@@ -72,4 +72,4 @@ const SignInForm: FC = () => {
   )
 }
 
-export { SignInForm }
+export default SignInForm

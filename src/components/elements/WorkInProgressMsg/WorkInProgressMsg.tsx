@@ -9,4 +9,4 @@ const WorkInProgressMsg: FC = () => (
   </div>
 )
 
-export { WorkInProgressMsg }
+export default WorkInProgressMsg

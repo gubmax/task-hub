@@ -9,4 +9,4 @@ const SearchPage: FC = () => {
   return isSearching ? <Loader /> : <SearchResultList />
 }
 
-export { SearchPage }
+export default SearchPage

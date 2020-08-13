@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react'
 import { Link as RouterLink, LinkProps, useLocation } from 'react-router-dom'
 
-const Link: FC<LinkProps> = memo(({ to, ...rest }) => {
+const Link: FC<LinkProps> = ({ to, ...rest }) => {
   const location = useLocation()
 
   const linkTo = typeof to === 'string'
@@ -21,6 +21,6 @@ const Link: FC<LinkProps> = memo(({ to, ...rest }) => {
       }}
     />
   )
-})
+}
 
-export { Link }
+export default memo(Link)

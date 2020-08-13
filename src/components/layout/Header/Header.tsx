@@ -11,7 +11,7 @@ import { ReactComponent as SignOutIcon } from 'src/static/images/icons/sign-out-
 import { HeaderProps } from './Header.types'
 import s from './Header.module.scss'
 
-const Header: FC<HeaderProps> = memo(({ iconWithLink }) => {
+const Header: FC<HeaderProps> = ({ iconWithLink }) => {
   const [{ showSidebar }, { toggleSidebar }] = useStore()
   const [, { signOut }] = useAuth()
 
@@ -64,6 +64,6 @@ const Header: FC<HeaderProps> = memo(({ iconWithLink }) => {
       </div>
     </header>
   )
-})
+}
 
-export { Header }
+export default memo(Header)

@@ -10,7 +10,7 @@ import { routes } from './routes'
 import { MainProps } from './Main.types'
 import s from './Main.module.scss'
 
-const Main: FC<MainProps> = memo(({ location }) => {
+const Main: FC<MainProps> = ({ location }) => {
   const [, { setLoadingStart, setLoadingEnd }] = useStore()
 
   const routesTemplate = useMemo(
@@ -46,6 +46,6 @@ const Main: FC<MainProps> = memo(({ location }) => {
       </Switch>
     </main>
   )
-})
+}
 
-export { Main }
+export default memo(Main)

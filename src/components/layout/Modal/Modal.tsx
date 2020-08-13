@@ -17,4 +17,4 @@ const Modal: FC = ({ children }) => {
   return createPortal(children, el)
 }
 
-export { Modal }
+export default Modal

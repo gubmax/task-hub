@@ -14,7 +14,7 @@ import { SignInPage } from 'src/components/pages'
 import { LocationType } from './Page.types'
 import s from './Page.module.scss'
 
-const Page: FC = memo(() => {
+const Page: FC = () => {
   const [{ loading }] = useStore()
   const { location, goBack } = useHistory<LocationType>()
 
@@ -82,6 +82,6 @@ const Page: FC = memo(() => {
       </Switch>
     </SwitchTransition>
   )
-})
+}
 
-export { Page }
+export default memo(Page)

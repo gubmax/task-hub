@@ -8,4 +8,4 @@ const ReviewPage: FC = () => {
   return <WorkInProgressMsg />
 }
 
-export { ReviewPage }
+export default ReviewPage

@@ -8,4 +8,4 @@ const CalendarPage: FC = () => {
   return <WorkInProgressMsg />
 }
 
-export { CalendarPage }
+export default CalendarPage

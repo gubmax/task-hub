@@ -1,10 +1,10 @@
-import React, { FC, memo } from 'react'
+import React, { FC } from 'react'
 
 import { cn } from 'src/helpers'
 import { SwitchProps } from './Switch.types'
 import s from './Switch.module.scss'
 
-const Switch: FC<SwitchProps> = memo(({
+const Switch: FC<SwitchProps> = ({
   className = '',
   checked = false,
   id, description, children, onChange,
@@ -26,6 +26,6 @@ const Switch: FC<SwitchProps> = memo(({
     />
     <span className={s.slider} />
   </label>
-))
+)
 
-export { Switch }
+export default Switch

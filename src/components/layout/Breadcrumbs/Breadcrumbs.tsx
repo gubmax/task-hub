@@ -13,7 +13,7 @@ import { Breadcrumb } from './Breadcrumbs.types'
 
 import s from './Breadcrumbs.module.scss'
 
-const Breadcrumbs: FC<{ location: Location }> = memo(({ location }) => {
+const Breadcrumbs: FC<{ location: Location }> = ({ location }) => {
   const [breadcrumbs, setBreadcrumbs] = useState<Breadcrumb[]>([])
   const prevLocation = usePrevious(location)
 
@@ -61,6 +61,6 @@ const Breadcrumbs: FC<{ location: Location }> = memo(({ location }) => {
       }
     </div>
   )
-})
+}
 
-export { Breadcrumbs }
+export default memo(Breadcrumbs)

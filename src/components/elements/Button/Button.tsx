@@ -1,11 +1,11 @@
-import React, { FC, memo, useCallback } from 'react'
+import React, { FC, useCallback } from 'react'
 
 import { cn } from 'src/helpers'
 import { Loader } from 'src/components/elements'
 import { ButtonProps } from './Button.types'
 import s from './Button.module.scss'
 
-const Button: FC<ButtonProps> = memo(({
+const Button: FC<ButtonProps> = ({
   children: text,
   type = 'button',
   primary, large, loading, className,
@@ -39,6 +39,6 @@ const Button: FC<ButtonProps> = memo(({
       {loading ? <Loader small white /> : text}
     </button>
   )
-})
+}
 
-export { Button }
+export default Button

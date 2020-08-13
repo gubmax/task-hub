@@ -19,7 +19,7 @@ const isWebpackReady = (moduleId: ResolveIndex) => {
 // eslint-disable-next-line no-undef
 const getWebpackModule = (id: ResolveIndex) => __webpack_require__(id)
 
-const Loadable: FC<LoadableProps> = memo(({
+const Loadable: FC<LoadableProps> = ({
   load, resolveIndex, fallback,
   onLoadingStart = noop,
   onLoadingEnd = noop,
@@ -69,6 +69,6 @@ const Loadable: FC<LoadableProps> = memo(({
   }
 
   return null
-})
+}
 
-export { Loadable }
+export default memo(Loadable)

@@ -6,4 +6,4 @@ const SearchResultList: FC = () => (
   <div className={s.noResultsMsg}>No results</div>
 )
 
-export { SearchResultList }
+export default SearchResultList

@@ -1,1 +1,1 @@
-export { ModalWindow } from './ModalWindow'
+export { default as ModalWindow } from './ModalWindow'

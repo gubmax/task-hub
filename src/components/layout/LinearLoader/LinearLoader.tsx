@@ -7,7 +7,7 @@ import { usePrevious } from 'src/hooks'
 import { LinearLoaderProps } from './LinearLoader.types'
 import s from './LinearLoader.module.scss'
 
-const LinearLoader: FC<LinearLoaderProps> = memo(({ active }) => {
+const LinearLoader: FC<LinearLoaderProps> = ({ active }) => {
   const prevActive = usePrevious(active)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const lineRef = useRef<HTMLDivElement>(null)
@@ -42,6 +42,6 @@ const LinearLoader: FC<LinearLoaderProps> = memo(({ active }) => {
       <div className={s.line} />
     </div>
   )
-})
+}
 
-export { LinearLoader }
+export default memo(LinearLoader)

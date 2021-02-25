@@ -10,10 +10,6 @@ const useDebouncedCallback = <T extends Callback>(callback: T, delay: number): [
   const timeoutHandlerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const componentIsMounted = useRef(false)
 
-  useEffect(() => {
-    componentIsMounted.current = true
-  }, [])
-
   const cancelDebouncedCallback = useCallback(() => {
     const timeout = timeoutHandlerRef.current
 
@@ -47,6 +43,11 @@ const useDebouncedCallback = <T extends Callback>(callback: T, delay: number): [
     }),
     [callDebouncedCallbackImmediately, cancelDebouncedCallback, delay],
   )
+
+  useEffect(() => {
+    componentIsMounted.current = true
+    return cancelDebouncedCallback
+  }, [cancelDebouncedCallback])
 
   return [
     debouncedCallback,
